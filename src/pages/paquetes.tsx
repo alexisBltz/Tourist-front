@@ -1,7 +1,7 @@
 export default function Paquetes (){
     return(
         <div>
-            <h1>Login</h1>
+            <h1>Paquetes</h1>
         </div>
     )
 }
