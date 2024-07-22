@@ -108,3 +108,28 @@ export const deleteServicio = async (id: number) => {
         throw error;
     }
 };
+
+export const buscarServicio = async (nombre: string) => {
+    try {
+        const response = await fetch(`${API_URL}/servicio/buscar?nombre=${nombre}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Error en la busqueda');
+        }
+        const data = await response.json();
+
+        console.log('Datos buscados en el backend:', data); //blabla para recibir la busqeudaa
+        return data;
+        // Supongamos que el array está en `data.content`
+        const serviciosArray = data.content && Array.isArray(data.content) ? data.content : [];
+        console.log(serviciosArray)
+        return serviciosArray;
+        } catch (error) {
+            console.error('Error en la recuperación de los servicios:', error);
+            throw error;
+        }
+}
