@@ -1,50 +1,52 @@
 import ListaServicios from "../components/Servicios/ListaServicios.tsx";
 import {useState} from "react";
+import {Checkbox} from "@headlessui/react";
+import {CheckIcon} from "@heroicons/react/16/solid";
+import SearchForm from "../components/SearchForm.tsx";
 
 export default function Servicios (){
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [submittedTerm, setSubmittedTerm] = useState<string>('');
+    const [enabled, setEnabled] = useState(true)
 
     const handleSearch = async (event: React.FormEvent) => {
         event.preventDefault(); // Evita el envío del formulario por defecto
         setSubmittedTerm(searchTerm.trim()); // Establece el término enviado
     }
+
     return(
         <div>
             <div className="" >
                 <div className="p-14">
-                    <form className="max-w-md mx-auto" onSubmit={handleSearch}>
-                        <label htmlFor="default-search"
-                               className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                        <div className="relative">
-                            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                    <path stroke="currentColor"/>
-                                </svg>
-                            </div>
-                            <input
-                                type="search"
-                                id="default-search"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                   className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300
-                                   rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
-                                   dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-                                   dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   placeholder="Busca servicios, experiencias, hoteles..." />
-                            <button
-                                type="submit"
-                                    className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800
-                                    focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm
-                                    px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:border-blue-500">
-                                Buscar
-                            </button>
-                        </div>
-                    </form>
+                    <SearchForm
+                        searchTerm={searchTerm}
+                        setSearchTerm={setSearchTerm}
+                        handleSearch={handleSearch}
+                        placeholder="Busca servicios, experiencias, hoteles..."
+                    />
                 </div>
             </div>
-            <ListaServicios searchTerm={submittedTerm} />
+            <div className="flex">
+                <div className="flex-row">
+                    <h1 className="pl-16 pt-8 font-serif text-3xl">Filtros</h1>
+                    <div className="flex p-6">
+
+                    <Checkbox
+                        checked={enabled}
+                        onChange={setEnabled}
+                        className=" group size-6 rounded-md bg-black p-1 ring-1 ring-white/15 ring-inset data-[checked]:bg-white"
+                    >
+                        <CheckIcon className="hidden size-6 fill-black group-data-[checked]:block" />
+
+                    </Checkbox>
+                        <h1 className="text-center ml-2 justify-center">Destino 1</h1>
+                    </div>
+                </div>
+
+                <div className="flex-row justify-center items-center">
+                    <ListaServicios searchTerm={submittedTerm} />
+                </div>
+            </div>
         </div>
 
     )
