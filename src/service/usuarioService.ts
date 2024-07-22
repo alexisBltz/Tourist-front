@@ -11,6 +11,7 @@ export interface DatosListadoUsuario {
     id: number;
     login: string;
     estadoRegistro: string;
+    rol: string;
     datosUsuarios: DatosListadoDatosUsuario[];
 }
 const getToken = (): string | null => {

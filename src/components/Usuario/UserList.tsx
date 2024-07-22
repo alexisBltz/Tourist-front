@@ -12,6 +12,7 @@ interface DatosListadoUsuario {
     id: number;
     login: string;
     estadoRegistro: string;
+    rol: string;
     datosUsuarios: DatosListadoDatosUsuario[];
 }
 
@@ -71,6 +72,7 @@ const UserList: React.FC = () => {
                             <td className="py-4 px-6">{usuario.id}</td>
                             <td className="py-4 px-6">{usuario.login}</td>
                             <td className="py-4 px-6">{usuario.estadoRegistro}</td>
+                            <td className="py-4 px-6">{usuario.rol}</td>
                             <td className="py-4 px-6">{usuario.datosUsuarios[0]?.nombre}</td>
                             <td className="py-4 px-6">{usuario.datosUsuarios[0]?.apellidoPaterno}</td>
                             <td className="py-4 px-6">{usuario.datosUsuarios[0]?.celular}</td>
