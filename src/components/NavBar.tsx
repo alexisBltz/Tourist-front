@@ -63,7 +63,8 @@ export function NavBar() {
         };
     }, []);
 
-    const isHomePage = location.pathname === '/' || location.pathname === '/login';
+    const isHomePage =
+        location.pathname === '/' || location.pathname === '/login' || location.pathname === '/registrarse';
     //console.log(isHomePage);
 
     return (
