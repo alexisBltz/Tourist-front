@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { getServicios, ServicioData } from "../../service/servicioService";
+import { getServicios, ServicioData, buscarServicio } from "../../service/servicioService";
 import ServicioCard from "./Card.tsx";
 
-const ListaDeServicios: React.FC = () => {
+const ListaDeServicios: React.FC<{ searchTerm?: string }> = ({ searchTerm }) => {
     const [servicios, setServicios] = useState<ServicioData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [pagina, setPagina] = useState<number>(0);
     const [hasMore, setHasMore] = useState<boolean>(true);
 
-    const fetchServicios = async (pagina: number) => {
+    const fetchServicios = async (pagina: number, searchTerm?: string) => {
         setLoading(true);
         try {
-            const data = await getServicios(pagina, 5);
+            const data = searchTerm
+                ? await buscarServicio(searchTerm)
+                : await getServicios(pagina, 5);
+
             console.log('Datos obtenidos:', data);
 
             if (Array.isArray(data)) {
-                console.log('IDs recibidos:', data.map(s => s.id));
-
                 setServicios(prev => {
-                    // Solo agregar elementos que no estén en el estado anterior
                     const newServicios = [...prev, ...data.filter(s => !prev.some(p => p.id === s.id))];
                     console.log('Servicios después de agregar:', newServicios.map(s => s.id));
                     return newServicios;
@@ -36,11 +36,21 @@ const ListaDeServicios: React.FC = () => {
         }
     };
 
-
+    useEffect(() => {
+        // Vuelve a cargar cuando cambia la busqueda
+        setPagina(0);
+        // Limpiar los servicios existentes
+        setServicios([]);
+        //capaz aca este el por que no aparece el boton cuando no sale la busqueda, no hay tiempo
+        //para solucionar, pero si busca :v
+        if (searchTerm === ''){
+            fetchServicios(pagina);
+        }
+    }, [searchTerm]);
 
     useEffect(() => {
-        fetchServicios(pagina);
-    }, [pagina]);
+        fetchServicios(pagina, searchTerm);
+    }, [pagina, searchTerm]);
 
     const cargarMasServicios = () => {
         if (hasMore && !loading) {
@@ -48,7 +58,7 @@ const ListaDeServicios: React.FC = () => {
         }
     };
 
-    if (loading && pagina === 1) {
+    if (loading && pagina === 0) {
         return <div>Loading...</div>;
     }
 

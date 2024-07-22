@@ -1,28 +1,19 @@
 import ListaServicios from "../components/Servicios/ListaServicios.tsx";
 import {useState} from "react";
-import {buscarServicio} from "../service/servicioService.ts";
 
 export default function Servicios (){
-    const [searchTerm, setSearchTerm] = useState('');
-    const [resultados, setResultados] = useState([]);
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [submittedTerm, setSubmittedTerm] = useState<string>('');
 
     const handleSearch = async (event: React.FormEvent) => {
         event.preventDefault(); // Evita el envío del formulario por defecto
-
-        if (searchTerm.trim()) {
-            try {
-                const data = await buscarServicio(searchTerm);
-                setResultados(data);
-            } catch (error) {
-                console.error('Error al buscar servicios:', error);
-            }
-        }
-    };
+        setSubmittedTerm(searchTerm.trim()); // Establece el término enviado
+    }
     return(
         <div>
             <div className="" >
                 <div className="p-14">
-                    <form className="max-w-md mx-auto">
+                    <form className="max-w-md mx-auto" onSubmit={handleSearch}>
                         <label htmlFor="default-search"
                                className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                         <div className="relative">
@@ -41,8 +32,9 @@ export default function Servicios (){
                                    rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
                                    dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                                    dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   placeholder="Busca servicios, hoteles..." required/>
-                            <button type="submit"
+                                   placeholder="Busca servicios, experiencias, hoteles..." />
+                            <button
+                                type="submit"
                                     className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800
                                     focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm
                                     px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:border-blue-500">
@@ -52,7 +44,7 @@ export default function Servicios (){
                     </form>
                 </div>
             </div>
-            <ListaServicios/>
+            <ListaServicios searchTerm={submittedTerm} />
         </div>
 
     )
