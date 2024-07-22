@@ -9,7 +9,9 @@ export interface ServicioData {
     costo: number;
     destino: string;
 }
-
+const getToken = (): string | null => {
+    return localStorage.getItem('token');
+};
 export const getServicio = async (id: number) => {
     try {
         const response = await fetch(`${API_URL}/servicio/${id}`, {
@@ -93,11 +95,13 @@ export const updateServicio = async (id: number, servicioData: Partial<ServicioD
 };
 
 export const deleteServicio = async (id: number) => {
+    const token = getToken();
     try {
         const response = await fetch(`${API_URL}/servicio/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
             },
         });
         if (!response.ok) {
