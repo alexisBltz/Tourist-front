@@ -1,9 +1,9 @@
-import React from 'react';
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import "../styles/Login.css"
 import {register} from "../service/authService.ts";
-import { useNavigate } from 'react-router-dom';
+
 
 export default function Register() {
     const formik = useFormik({
@@ -100,7 +100,7 @@ export default function Register() {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.nombres}
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
+                                    className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1
                                     ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                                     focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
@@ -124,7 +124,7 @@ export default function Register() {
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         value={formik.values.apellidoPaterno}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
+                                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1
                                         ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                                         focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
@@ -147,7 +147,7 @@ export default function Register() {
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         value={formik.values.apellidoMaterno}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
+                                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1
                                         ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                                         focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
@@ -170,7 +170,7 @@ export default function Register() {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.direccion}
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
+                                    className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1
                                     ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                                     focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
@@ -194,7 +194,7 @@ export default function Register() {
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         value={formik.values.fechaNacimiento}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
+                                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1
                                         ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                                         focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
@@ -217,7 +217,7 @@ export default function Register() {
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         value={formik.values.dni}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
+                                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1
                                         ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                                         focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
@@ -242,7 +242,7 @@ export default function Register() {
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         value={formik.values.nacionalidad}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
+                                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1
                                         ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                                         focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
@@ -265,7 +265,7 @@ export default function Register() {
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         value={formik.values.celular}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
+                                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1
                                         ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                                         focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
@@ -288,7 +288,7 @@ export default function Register() {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     value={formik.values.email}
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
+                                    className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1
                                     ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                                     focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
@@ -311,7 +311,7 @@ export default function Register() {
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         value={formik.values.password}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
+                                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1
                                         ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                                         focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
@@ -333,7 +333,7 @@ export default function Register() {
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         value={formik.values.confirmPassword}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1
+                                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1
                                         ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                                         focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
@@ -346,7 +346,7 @@ export default function Register() {
                         <div>
                             <button
                                 type="submit"
-                                className="flex w-full justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm
+                                className="flex w-full justify-center rounded-md bg-blue-500 px-3 p-1.5 text-sm
                                 font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline
                                 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
