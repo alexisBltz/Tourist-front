@@ -2,9 +2,9 @@ import React from 'react';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import NotFound from '../pages/notFound.tsx'
 
-import Home from '../pages/Home.jsx'
-import Login from "../pages/login.tsx"
-import Registrarse from "../pages/Register.jsx"
+import Home from '../pages/home.tsx'
+import LoginPage from "../pages/loginPage.tsx"
+import Registrarse from "../pages/register.tsx"
 import Servicios from "../pages/servicios.tsx"
 import Paquetes from "../pages/paquetes.tsx"
 import Nosotros from "../pages/nosotros.tsx";
@@ -29,7 +29,7 @@ export default function Routing() {
 
                 {
                     path: "login",
-                    element: <Login />
+                    element: <LoginPage />
                 },
                 {
                     path: "servicios",

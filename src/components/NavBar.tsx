@@ -64,7 +64,7 @@ export function NavBar() {
         };
     }, []);
 
-    const isHomePage = location.pathname === '/';
+    const isHomePage = location.pathname === '/' || location.pathname === '/login';
     //console.log(isHomePage);
 
     return (
