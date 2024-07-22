@@ -60,6 +60,7 @@ const UserList: React.FC = () => {
                         <th className="py-3 px-6 text-left">ID</th>
                         <th className="py-3 px-6 text-left">Login</th>
                         <th className="py-3 px-6 text-left">Estado</th>
+                        <th className="py-3 px-6 text-left">Rol</th>
                         <th className="py-3 px-6 text-left">Nombre</th>
                         <th className="py-3 px-6 text-left">Apellido Paterno</th>
                         <th className="py-3 px-6 text-left">Celular</th>
