@@ -35,7 +35,6 @@ export function NavBar() {
     }, [location.pathname]);
 
     useEffect(() => {
-        // Aquí puedes agregar la lógica para determinar si el usuario está logueado
         const token = localStorage.getItem('token');
         if (token) {
             setIsLoggedIn(true);
@@ -135,7 +134,7 @@ export function NavBar() {
                                                 </div>
                                                 <MenuItems
                                                     transition
-                                                    className="right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1
+                                                    className="right-0 z-10 mt-28 w-48 origin-top-right rounded-md bg-white py-1
                                             shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none
                                             data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0
                                             data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out
@@ -164,10 +163,11 @@ export function NavBar() {
                                                     <MenuItem>
                                                         {({ focus }) => (
                                                             <a
-                                                                href="#"
+                                                                onClick={handleLogout}
+                                                                href="/"
                                                                 className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                             >
-                                                                Sign out
+                                                                Salir
                                                             </a>
                                                         )}
                                                     </MenuItem>
