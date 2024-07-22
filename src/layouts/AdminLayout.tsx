@@ -3,10 +3,10 @@ import Footer from "../components/Footer.tsx"
 import {Outlet} from "react-router-dom";
 
 const initialNavigation= [
-    { name: 'Usuarios', to: '/', current: false },
-    { name: 'Servicios', to: '/paquetes', current: false },
-    { name: 'Paquetes', to: '/servicios', current: false },
-    { name: 'Ventas', to: '/nosotros', current: false },
+    { name: 'Usuarios', to: '/admin/usuarios', current: false },
+    { name: 'Servicios', to: '/admin/servicios', current: false },
+    { name: 'Paquetes', to: '/admin/paquetes', current: false },
+    { name: 'Ventas', to: '/admin/ventas', current: false },
 ];
 export default function AdminLayout() {
     return (

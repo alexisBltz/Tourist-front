@@ -1,8 +1,11 @@
 
-import Carousel from "../components/Slide/Slideshow.jsx"
+import Carousel from "../../components/Slide/Slideshow.tsx"
+import ServicioCard from "../../components/Servicios/Card.tsx";
+import {getServicios, ServicioData} from "../../service/servicioService.ts";
+import {useEffect, useState} from "react";
 
 
-export default function Home() {
+export default function HomeUser() {
     const slides = [
         {
             nombre: "AREQUIPA",
@@ -25,6 +28,20 @@ export default function Home() {
             descripcion: "bla bla bla bla bla",
         },
     ]
+    const [servicios, setServicios] = useState<ServicioData[]>([]);
+    useEffect(() => {
+        const fetchServicios = async () => {
+            try {
+                const fetchedServicios = await getServicios(1, 3); // Cambia los parámetros según tu necesidad
+                setServicios(fetchedServicios);
+            } catch (error) {
+                console.error("Error fetching servicios:", error);
+            }
+        };
+
+        fetchServicios();
+    }, []);
+
     return (
         <div >
             <div className="slides">
@@ -40,8 +57,21 @@ export default function Home() {
                     el destino perfecto para cada tipo de viajero.
                 </h2>
             </div>
-            HOMEEEEEEEEE
-            {/* <ListaServicios/> */}
+
+            <div className="flex flex-wrap justify-center">
+                {servicios.map((servicio) => (
+                    <ServicioCard
+                        key={servicio.id}
+                        id={servicio.id}
+                        image={servicio.image}
+                        nombre={servicio.nombre}
+                        descripcion={servicio.descripcion}
+                        fecha={servicio.fecha}
+                        costo={servicio.costo}
+                        destino={servicio.destino}
+                    />
+                ))}
+            </div>
 
         </div>
     )
