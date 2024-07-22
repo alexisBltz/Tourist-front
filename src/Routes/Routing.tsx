@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import NotFound from '../pages/notFound.tsx'
 
-import Home from '../pages/home.tsx'
+import HomeUser from '../pages/user/homeUser.tsx'
 import LoginPage from "../pages/loginPage.tsx"
 import Registrarse from "../pages/register.tsx"
 import Servicios from "../pages/servicios.tsx"
@@ -12,6 +12,13 @@ import LayoutUser from "../layouts/UserLayout.tsx";
 import AdminLayout from "../layouts/AdminLayout.tsx";
 import ProtectedRoutes from "./ProtectedRoutes.tsx";
 import Usuarios from "../pages/admin/usuarios.tsx";
+import HomeAdmin from "../pages/admin/homeAdmin.tsx";
+import PaquetesAdmin from "../pages/admin/paquetesAdmin.tsx";
+import ServiciosAdmin from "../pages/admin/serviciosAdmin.tsx";
+import Ventas from "../pages/admin/ventas.tsx";
+
+
+
 
 export default function Routing() {
 
@@ -32,7 +39,7 @@ export default function Routing() {
             children: [
                 {
                     index: true,
-                    element: < Home />
+                    element: < HomeUser />
                 },
                 {
                     path: "servicios",
@@ -65,7 +72,23 @@ export default function Routing() {
             children: [
                 {
                     index: true,
+                    element: <HomeAdmin />
+                },
+                {
+                    path: "/admin/usuarios",
                     element: <Usuarios />
+                },
+                {
+                    path: "/admin/servicios",
+                    element: <ServiciosAdmin />
+                },
+                {
+                    path: "/admin/paquetes",
+                    element: <PaquetesAdmin />
+                },
+                {
+                    path: "/admin/ventas",
+                    element: <Ventas />
                 },
                 {
                     path: "*",
