@@ -2,6 +2,8 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import "../styles/Login.css"
+import {register} from "../service/authService.ts";
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
     const formik = useFormik({
@@ -19,33 +21,59 @@ export default function Register() {
             confirmPassword: ''
         },
         validationSchema: Yup.object({
-            nombres: Yup.string()
-                .required('Required'),
-            apellidoPaterno: Yup.string()
-                .required('Required'),
-            apellidoMaterno: Yup.string()
-                .required('Required'),
-            direccion: Yup.string()
-                .required('Required'),
-            fechaNacimiento: Yup.date()
-                .required('Required'),
-            dni: Yup.string()
-                .required('Required'),
-            nacionalidad: Yup.string()
-                .required('Required'),
-            celular: Yup.string()
-                .required('Required'),
             email: Yup.string()
-                .email('Invalid email address')
-                .required('Required'),
+                .email('Email invalido')
+                .required('Requerido'),
             password: Yup.string()
-                .required('Required'),
+                .required('Requerido'),
+            nombres: Yup.string()
+                .required('Requerido'),
+            apellidoPaterno: Yup.string()
+                .required('Requerido'),
+            apellidoMaterno: Yup.string()
+                .required('Requerido'),
+            direccion: Yup.string()
+                .required('Requerido'),
+            fechaNacimiento: Yup.date()
+                .required('Requerido'),
+            dni: Yup.string()
+                .required('Requerido'),
+            nacionalidad: Yup.string()
+                .required('Requerido'),
+            celular: Yup.string()
+                .required('Requerido'),
             confirmPassword: Yup.string()
-                .oneOf([Yup.ref('password'), null], 'Passwords must match')
-                .required('Required')
+                .oneOf([Yup.ref('password'), null], 'No son iguales')
+                .required('Requerido')
         }),
-        onSubmit: values => {
-            console.log(JSON.stringify(values, null, 2));
+        onSubmit: async (values) => {
+            try {
+                const userData = {
+                    login: values.email,
+                    clave: values.password,
+                    rol: 'USER',  // Puedes ajustar esto según sea necesario
+                    estadoRegistro: 'A',
+                    datosUsuarios: [
+                        {
+                            nombre: values.nombres,
+                            apellidoPaterno: values.apellidoPaterno,
+                            apellidoMaterno: values.apellidoMaterno,
+                            direccion: values.direccion,
+                            fechaNacimiento: values.fechaNacimiento,
+                            dni: values.dni,
+                            nacionalidad: values.nacionalidad,
+                            celular: values.celular,
+                        }
+                    ]
+                };
+
+                const response = await register(userData);
+                //console.log('Registro exitoso:', response);
+                localStorage.setItem('token', response.token);
+                window.location.href ="/"
+            } catch (error) {
+                console.error('Error en el registro:', error);
+            }
         },
     });
 
@@ -328,7 +356,7 @@ export default function Register() {
                     </form>
                     <p className="mt-10 text-center text-sm text-gray-500">
                         Te encanta viajar{' '}
-                        <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                        <a className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                             ¡Bienvenido a Maria Belen!
                         </a>
                     </p>

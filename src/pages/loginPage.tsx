@@ -103,7 +103,7 @@ export default function LoginPage (){
 
                     <p className="mt-10 text-center text-sm text-gray-500">
                         Te encanta viajar{' '}
-                        <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                        <a className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                             Bienvenido a Maria Belen!
                         </a>
                     </p>
