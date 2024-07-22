@@ -1,4 +1,3 @@
-import React from 'react';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import NotFound from '../pages/notFound.tsx'
 
@@ -11,25 +10,29 @@ import Nosotros from "../pages/nosotros.tsx";
 
 import LayoutUser from "../layouts/UserLayout.tsx";
 import AdminLayout from "../layouts/AdminLayout.tsx";
+import ProtectedRoutes from "./ProtectedRoutes.tsx";
+import Usuarios from "../pages/admin/usuarios.tsx";
 
 export default function Routing() {
 
 
     const route = createBrowserRouter([
-
+        {
+            path: "login",
+            element: <LoginPage />
+        },
+        {
+            path: "registrarse",
+            element: <Registrarse />
+        },
         {
             path: "/",
-            element: <LayoutUser />,
+            element: <LayoutUser/>,
             errorElement: <NotFound />,
             children: [
                 {
                     index: true,
                     element: < Home />
-                },
-
-                {
-                    path: "login",
-                    element: <LoginPage />
                 },
                 {
                     path: "servicios",
@@ -45,27 +48,33 @@ export default function Routing() {
                     element: <Nosotros />
                 },
                 {
-                    path: "registrarse",
-                    element: <Registrarse />
-                },
+                    path: "*",
+                    element: <NotFound/>
+                }
+            ],
 
+        },
+        {
+            path: "/admin",
+            element: (
+                <ProtectedRoutes requiredRole='ADMIN'>
+                    <AdminLayout/>
+                </ProtectedRoutes>
+            ),
+            errorElement: <NotFound />,
+            children: [
                 {
-
-                    path: "administrar",
-                    element: <AdminLayout/>,
+                    index: true,
+                    element: <Usuarios />
                 },
                 {
                     path: "*",
                     element: <NotFound/>
-                }
-
-
-            ]
-
+                },
+            ],
         },
-
-
     ]);
+
 
     return (
         <RouterProvider router={route} />

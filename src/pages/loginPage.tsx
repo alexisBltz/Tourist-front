@@ -1,18 +1,24 @@
-
 import "../styles/Login.css";
-import {useState} from "react";
+import React, {useState} from "react";
 import { login } from '../service/authService.ts';
+import {useNavigate} from "react-router-dom";
 
 export default function LoginPage (){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
             await login(email, password);
-            window.location.href = '/';
+            const userRole = localStorage.getItem('rol');
+            if (userRole === 'ADMIN') {
+                navigate('/admin');
+            } else {
+                navigate('/');
+            }
         } catch (error) {
             setError('Contraseña incorrecta. Por favor, intenta nuevamente.');
         }
@@ -33,7 +39,7 @@ export default function LoginPage (){
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form onSubmit={handleSubmit} action="/" method="POST" className="space-y-6">
+                    <form onSubmit={handleSubmit}  method="POST" className="space-y-6">
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                                 Correo Electrónico

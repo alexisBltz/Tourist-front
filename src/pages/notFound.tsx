@@ -1,7 +1,7 @@
 export default function NotFound (){
     return(
         <div>
-            <h1>Login</h1>
+            <h1>NO EXISTE GAA</h1>
         </div>
     )
 }

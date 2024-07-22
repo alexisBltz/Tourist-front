@@ -8,7 +8,7 @@ import {Link, useLocation} from "react-router-dom";
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
-
+/*
 const initialNavigation= [
     { name: 'Inicio', to: '/', current: false },
     { name: 'Paquetes Turísticos', to: '/paquetes', current: false },
@@ -16,8 +16,8 @@ const initialNavigation= [
     { name: 'Nosotros', to: '/nosotros', current: false },
     //{name: 'Login', href: 'login', current: false },
 ];
-
-export function NavBar() {
+*/
+export function NavBar({ initialNavigation }) {
     //login
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 

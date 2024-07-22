@@ -1,5 +1,4 @@
-// src/services/authService.ts
-const API_URL = 'http://localhost:8091';  // Reemplaza con la URL de tu API
+const API_URL = 'http://localhost:8091';
 
 export const login = async (email: string, password: string) => {
     try {
@@ -10,19 +9,28 @@ export const login = async (email: string, password: string) => {
             },
             body: JSON.stringify({ login: email, clave: password }),
         });
+
         if (!response.ok) {
             throw new Error('Login failed');
         }
+
         const data = await response.json();
-        // Guarda el token en localStorage o en un contexto global
+
+        // Verifica que los campos esperados existan en la respuesta
+        if (!data.token || !data.rol) {
+            throw new Error('No hay token ni rol');
+        }
+
+        // Guarda el token y rol en localStorage
         localStorage.setItem('token', data.token);
+        localStorage.setItem('rol', data.rol);
+
         return data;
     } catch (error) {
         console.error('Error during login:', error);
         throw error;
     }
 };
-
 interface UsuarioData {
     login: string;
     clave: string;
