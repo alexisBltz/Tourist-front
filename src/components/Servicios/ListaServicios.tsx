@@ -5,19 +5,25 @@ import ServicioCard from "./Card.tsx";
 const ListaDeServicios: React.FC = () => {
     const [servicios, setServicios] = useState<ServicioData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [pagina, setPagina] = useState<number>(1);
+    const [pagina, setPagina] = useState<number>(0);
     const [hasMore, setHasMore] = useState<boolean>(true);
 
     const fetchServicios = async (pagina: number) => {
         setLoading(true);
         try {
-            const data = await getServicios(pagina, 3);
+            const data = await getServicios(pagina, 5);
             console.log('Datos obtenidos:', data);
 
             if (Array.isArray(data)) {
-                setServicios(prev => [...prev, ...data]);
-                // Si la longitud de los datos obtenidos es menor que el límite, no hay más servicios
-                if (data.length < 3) {
+                console.log('IDs recibidos:', data.map(s => s.id));
+
+                setServicios(prev => {
+                    // Solo agregar elementos que no estén en el estado anterior
+                    const newServicios = [...prev, ...data.filter(s => !prev.some(p => p.id === s.id))];
+                    console.log('Servicios después de agregar:', newServicios.map(s => s.id));
+                    return newServicios;
+                });
+                if (data.length < 5) {
                     setHasMore(false);
                 }
             } else {
@@ -29,6 +35,8 @@ const ListaDeServicios: React.FC = () => {
             setLoading(false);
         }
     };
+
+
 
     useEffect(() => {
         fetchServicios(pagina);
