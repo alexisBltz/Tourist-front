@@ -37,7 +37,7 @@ const DestinosCheckbox: React.FC = () => {
         <div>
             {destinos.map((destino) => (
                 <div key={destino}>
-                    <div className="flex p-6">
+                    <div className="flex p-6 pl-36">
                     <Checkbox
                         checked={selectedDestinos.has(destino)}
                         onChange={() => handleCheckboxChange(destino)}

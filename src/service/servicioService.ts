@@ -158,6 +158,42 @@ export const getDestinos = async (): Promise<string[]> => {
         throw error;
     }
 };
+export const getDatosDestinos = async (page: number, size: number, destinos: string[] = []): Promise<ServicioData[]> => {
+    try {
+        // Construye los parámetros de la query string
+        const queryParams = new URLSearchParams();
+        queryParams.append('page', page.toString());
+        queryParams.append('size', size.toString());
+
+        // Agrega los destinos a los parámetros de la query string si existen
+        if (destinos.length > 0) {
+            destinos.forEach(destino => queryParams.append('destinos', destino));
+        }
+
+        // Realiza la solicitud al backend
+        const response = await fetch(`${API_URL}/servicio/destino?${queryParams.toString()}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Error fetching servicios');
+        }
+
+        const data = await response.json();
+        console.log('Datos recibidos del backend:', data); // Log para verificar datos
+
+        // Supongamos que el array está en `data.content`
+        const serviciosArray = data.content && Array.isArray(data.content) ? data.content : [];
+        return serviciosArray;
+    } catch (error) {
+        console.error('Error fetching servicios:', error);
+        throw error;
+    }
+};
+
 
 
 

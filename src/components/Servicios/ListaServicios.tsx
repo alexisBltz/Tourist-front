@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { getServicios, ServicioData, buscarServicio } from "../../service/servicioService";
 import ServicioCard from "./Card.tsx";
 
-const ListaDeServicios: React.FC<{ searchTerm?: string }> = ({ searchTerm }) => {
+const ListaDeServicios: React.FC<
+    { searchTerm?: string, destinosSeleccionados: string[] }> = ({ searchTerm, destinosSeleccionados }) => {
     const [servicios, setServicios] = useState<ServicioData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [pagina, setPagina] = useState<number>(0);
@@ -11,6 +12,7 @@ const ListaDeServicios: React.FC<{ searchTerm?: string }> = ({ searchTerm }) => 
     const fetchServicios = async (pagina: number, searchTerm?: string) => {
         setLoading(true);
         try {
+
             const data = searchTerm
                 ? await buscarServicio(searchTerm)
                 : await getServicios(pagina, 5);

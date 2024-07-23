@@ -29,8 +29,8 @@ export default function Servicios (){
             </div>
 
             <div className="flex">
-                <div className="ml-7 flex-row bg-gray-200 rounded-lg">
-                    <h1 className="pl-36 pt-16 pr-36 font-serif text-3xl">Destinos</h1>
+                <div className="ml-10 flex-row bg-gray-200 rounded-lg">
+                    <h1 className="pl-32 pt-16 pr-36 font-serif text-3xl">Destinos</h1>
                     <DestinosCheckBox/>
                 </div>
 
