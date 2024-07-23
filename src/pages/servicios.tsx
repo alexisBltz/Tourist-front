@@ -3,6 +3,7 @@ import {useState} from "react";
 import {Checkbox} from "@headlessui/react";
 import {CheckIcon} from "@heroicons/react/16/solid";
 import SearchForm from "../components/SearchForm.tsx";
+import DestinosCheckBox from "../components/DestinosCheckBox.tsx";
 
 export default function Servicios (){
     const [searchTerm, setSearchTerm] = useState<string>('');
@@ -26,21 +27,11 @@ export default function Servicios (){
                     />
                 </div>
             </div>
+
             <div className="flex">
-                <div className="flex-row">
-                    <h1 className="pl-16 pt-8 font-serif text-3xl">Filtros</h1>
-                    <div className="flex p-6">
-
-                    <Checkbox
-                        checked={enabled}
-                        onChange={setEnabled}
-                        className=" group size-6 rounded-md bg-black p-1 ring-1 ring-white/15 ring-inset data-[checked]:bg-white"
-                    >
-                        <CheckIcon className="hidden size-6 fill-black group-data-[checked]:block" />
-
-                    </Checkbox>
-                        <h1 className="text-center ml-2 justify-center">Destino 1</h1>
-                    </div>
+                <div className="ml-7 flex-row bg-gray-200 rounded-lg">
+                    <h1 className="pl-36 pt-16 pr-36 font-serif text-3xl">Destinos</h1>
+                    <DestinosCheckBox/>
                 </div>
 
                 <div className="flex-row justify-center items-center">

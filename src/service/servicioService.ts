@@ -133,5 +133,31 @@ export const buscarServicio = async (nombre: string) => {
             throw error;
         }
 }
+export const getDestinos = async (): Promise<string[]> => {
+    try {
+        const response = await fetch(`${API_URL}/servicio/destino`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Error fetching destinos');
+        }
+        const data = await response.json();
+        console.log('Datos de destinos recibidos del backend:', data);
+
+        // Extraer destinos del array `content` en el JSON recibido
+        const destinosArray = data.content && Array.isArray(data.content)
+            ? data.content.map((item: { destino: string }) => item.destino)
+            : [];
+        console.log("Destinos del array:", destinosArray);
+        return destinosArray;
+    } catch (error) {
+        console.error('Error fetching destinos:', error);
+        throw error;
+    }
+};
+
 
 
