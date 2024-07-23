@@ -5,7 +5,7 @@ import {Outlet} from "react-router-dom";
 const initialNavigation= [
     { name: 'Inicio', to: '/', current: false },
     { name: 'Paquetes Turísticos', to: '/paquetes', current: false },
-    { name: 'Servicios', to: '/servicios', current: false },
+    { name: 'Servicios', to: '/servicios/', current: false },
     { name: 'Nosotros', to: '/nosotros', current: false },
     //{name: 'Login', href: 'login', current: false },
 ];
