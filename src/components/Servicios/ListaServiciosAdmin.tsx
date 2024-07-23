@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {deleteServicio, getServicios, ServicioData} from "../../service/servicioService.ts";
 import ServicioCard from "./Card.tsx";
+import ServicioCardAdmin from "./CardAdmin.tsx";
 
 const ListaDeServiciosAdmin: React.FC = () => {
     const [servicios, setServicios] = useState<ServicioData[]>([]);
@@ -69,7 +70,7 @@ const ListaDeServiciosAdmin: React.FC = () => {
         <div className="flex flex-col items-center">
             <div className="flex flex-wrap justify-center">
                 {servicios.map(servicio => (
-                    <ServicioCard
+                    <ServicioCardAdmin
                         key={servicio.id}
                         id={servicio.id}
                         image={servicio.image}
