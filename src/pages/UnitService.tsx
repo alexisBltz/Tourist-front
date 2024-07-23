@@ -37,7 +37,6 @@ const UnitService: React.FC = () => {
                         <p className="text-gray-600 text-lg mb-2"><span className="font-semibold">Costo:</span> S/. {servicio.costo}</p>
                         <p className="text-gray-600 text-lg"><span className="font-semibold">Destino:</span> {servicio.destino}</p>
                     </div>
-                    <button onClick={handleBack} className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition-colors duration-300">Volver</button>
                 </div>
             </div>
         </div>

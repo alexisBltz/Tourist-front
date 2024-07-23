@@ -1,7 +1,5 @@
 import ListaServicios from "../components/Servicios/ListaServicios.tsx";
 import {useState} from "react";
-import {Checkbox} from "@headlessui/react";
-import {CheckIcon} from "@heroicons/react/16/solid";
 import SearchForm from "../components/SearchForm.tsx";
 import DestinosCheckBox from "../components/DestinosCheckBox.tsx";
 
