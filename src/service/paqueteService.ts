@@ -53,9 +53,7 @@ export const buscarPaquete = async (nombre: string) => {
 
         console.log('Datos buscados en el backend:', data);
         // Supongamos que el array está en `data.content`
-        const paquetesArray = data.content && Array.isArray(data.content) ? data.content : [];
-        console.log(paquetesArray);
-        return paquetesArray;
+        return data;
     } catch (error) {
         console.error('Error en la recuperación de los paquetes:', error);
         throw error;
