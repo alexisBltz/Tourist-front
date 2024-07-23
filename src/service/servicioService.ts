@@ -53,15 +53,26 @@ export const getServicios = async (page: number, size: number): Promise<Servicio
         throw error;
     }
 };
-
-export const createServicio = async (servicioData: ServicioData) => {
+interface CrearServicio {
+    image: string;
+    descripcion: string;
+    nombre: string;
+    fecha: string;
+    costo: string;
+    tipo: string;
+    destino: string;
+    estadoRegistro: string;
+}
+export const createServicio = async (crearServicio: CrearServicio) => {
+    const token = getToken();
     try {
         const response = await fetch(`${API_URL}/servicio`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
             },
-            body: JSON.stringify(servicioData),
+            body: JSON.stringify(crearServicio),
         });
         if (!response.ok) {
             throw new Error('Error creating servicio');

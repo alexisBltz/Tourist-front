@@ -18,6 +18,8 @@ import ServiciosAdmin from "../pages/admin/serviciosAdmin.tsx";
 import Ventas from "../pages/admin/ventas.tsx";
 import UnitService from "../pages/UnitService.tsx";
 
+import RegistrarServicio from "../components/Servicios/CrearServicio.tsx";
+
 
 
 
@@ -25,6 +27,7 @@ export default function Routing() {
 
 
     const route = createBrowserRouter([
+
         {
             path: "login",
             element: <LoginPage />
@@ -47,6 +50,7 @@ export default function Routing() {
                     element: <Servicios />
 
                 },
+
                 {
                     path:"/servicios/:id",
                     element: <UnitService/>
@@ -84,6 +88,10 @@ export default function Routing() {
                     element: <Usuarios />
                 },
                 {
+                    path: "servicios/crear",
+                    element: <RegistrarServicio/>
+                },
+                {
                     path: "/admin/servicios",
                     element: <ServiciosAdmin />
                 },
@@ -99,8 +107,10 @@ export default function Routing() {
                     path: "*",
                     element: <NotFound/>
                 },
+
             ],
         },
+
     ]);
 
 

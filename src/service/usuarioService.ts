@@ -75,3 +75,35 @@ export const updateUsuarioRol = async (id: number, nuevoRol: string) => {
         throw error;
     }
 };
+
+interface DatosRegistroUsuario {
+    image: string;
+    descripcion: string;
+    nombre: string;
+    fecha: string;
+    costo: number;
+    tipo: string;
+    destino: string;
+    estadoRegistro: string;
+}
+
+export const registrarUsuario = async (datosRegistroUsuario: DatosRegistroUsuario) => {
+    const token = getToken();
+    try {
+        const response = await fetch(`${API_URL}/usuario`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(datosRegistroUsuario),
+        });
+        if (!response.ok) {
+            throw new Error('Error al registrar el usuario');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error al registrar el usuario:', error);
+        throw error;
+    }
+};

@@ -63,17 +63,18 @@ const UserList: React.FC = () => {
             {loading ? (
                 <p>Cargando...</p>
             ) : (
-                <table className="min-w-full bg-white border border-gray-200">
+                <div className="overflow-x-auto">
+                <table className="w-full bg-white border border-gray-200">
                     <thead>
-                    <tr className="w-full bg-gray-100 border-b">
-                        <th className="py-3 px-6 text-left">ID</th>
-                        <th className="py-3 px-6 text-left">Login</th>
-                        <th className="py-3 px-6 text-left">Estado</th>
-                        <th className="py-3 px-6 text-left">Rol</th>
-                        <th className="py-3 px-6 text-left">Nombre</th>
-                        <th className="py-3 px-6 text-left">Apellido Paterno</th>
-                        <th className="py-3 px-6 text-left">Celular</th>
-                        <th className="py-3 px-6 text-left">Acciones</th>
+                    <tr className="w-full bg-gray-80 border-b">
+                        <th className="py-3 px-6 text-center">ID</th>
+                        <th className="py-3 px-6 text-center">Login</th>
+                        <th className="py-3 px-6 text-center">Estado</th>
+                        <th className="py-3 px-6 text-center">Rol</th>
+                        <th className="py-3 px-6 text-center">Nombre</th>
+                        <th className="py-3 px-6 text-center">Apellido Paterno</th>
+                        <th className="py-3 px-6 text-center">Celular</th>
+                        <th className="py-3 px-6 text-center">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -108,6 +109,7 @@ const UserList: React.FC = () => {
                     ))}
                     </tbody>
                 </table>
+                </div>
             )}
             <div className="mt-4">
                 <button
