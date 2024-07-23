@@ -16,6 +16,7 @@ import HomeAdmin from "../pages/admin/homeAdmin.tsx";
 import PaquetesAdmin from "../pages/admin/paquetesAdmin.tsx";
 import ServiciosAdmin from "../pages/admin/serviciosAdmin.tsx";
 import Ventas from "../pages/admin/ventas.tsx";
+import UnitService from "../pages/UnitService.tsx";
 
 
 
@@ -45,6 +46,10 @@ export default function Routing() {
                     path: "servicios",
                     element: <Servicios />
 
+                },
+                {
+                    path:"/servicios/:id",
+                    element: <UnitService/>
                 },
                 {
                     path: "paquetes",

@@ -1,7 +1,15 @@
+import Vision from "../components/Nosotros/Vision.tsx";
+import Mision from "../components/Nosotros/Mision.tsx";
+
+
 export default function Nosotros (){
     return(
         <div>
-            <h1>Login</h1>
+
+
+            <Mision/>
+            <Vision/>
+
         </div>
     )
 }
