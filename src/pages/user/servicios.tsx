@@ -1,7 +1,7 @@
-import ListaServicios from "../components/Servicios/ListaServicios.tsx";
+import ListaServicios from "../../components/Servicios/ListaServicios.tsx";
 import {useState} from "react";
-import SearchForm from "../components/SearchForm.tsx";
-import DestinosCheckBox from "../components/DestinosCheckBox.tsx";
+import SearchForm from "../../components/SearchForm.tsx";
+import DestinosCheckBox from "../../components/DestinosCheckBox.tsx";
 
 export default function Servicios (){
     const [searchTerm, setSearchTerm] = useState<string>('');

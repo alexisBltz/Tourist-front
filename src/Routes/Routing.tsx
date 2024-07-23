@@ -4,9 +4,9 @@ import NotFound from '../pages/notFound.tsx'
 import HomeUser from '../pages/user/homeUser.tsx'
 import LoginPage from "../pages/loginPage.tsx"
 import Registrarse from "../pages/register.tsx"
-import Servicios from "../pages/servicios.tsx"
-import Paquetes from "../pages/paquetes.tsx"
-import Nosotros from "../pages/nosotros.tsx";
+import Servicios from "../pages/user/servicios.tsx"
+import Paquetes from "../pages/user/paquetes.tsx"
+import Nosotros from "../pages/user/nosotros.tsx";
 
 import LayoutUser from "../layouts/UserLayout.tsx";
 import AdminLayout from "../layouts/AdminLayout.tsx";

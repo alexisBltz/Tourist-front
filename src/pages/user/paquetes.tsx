@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 // Asegúrate de importar el componente SearchForm
 
-import ListaDePaquetes from "../components/Paquetes/ListaDePaquetes.tsx";
+import ListaDePaquetes from "../../components/Paquetes/ListaDePaquetes.tsx";
 
-import SearchForm from "../components/SearchForm.tsx"; // Asegúrate de importar el componente PaquetesCheckBox
+import SearchForm from "../../components/SearchForm.tsx"; // Asegúrate de importar el componente PaquetesCheckBox
 
 export default function Paquetes() {
     const [searchTerm, setSearchTerm] = useState<string>('');
