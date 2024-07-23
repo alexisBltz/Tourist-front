@@ -96,3 +96,30 @@ export const deletePaquete = async (id: number) => {
         throw error;
     }
 };
+
+interface PaqueteServicio {
+    paqEstReg: string;
+    paqImg: string;
+    nombre: string;
+    serviciosCodigos: number[];
+}
+
+export const createPaquete = async (paqueteServicio: PaqueteServicio) => {
+    const token = getToken();
+    try {
+        const response = await fetch(`${API_URL}/paquete`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(paqueteServicio),
+        });
+
+        if (!response.ok) throw new Error('Error creating paquete');
+        return await response.json();
+    } catch (error) {
+        console.error('Error creating paquete:', error);
+        throw error;
+    }
+};

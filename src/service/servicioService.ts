@@ -207,6 +207,18 @@ export const getDatosDestinos = async (page: number, size: number, destinos: str
     }
 };
 
-
+export const listarServicios = async (): Promise<ServicioData[]> => {
+    try {
+        const response = await fetch(`${API_URL}/servicio`);
+        if (!response.ok) {
+            throw new Error('Error fetching servicios');
+        }
+        const data = await response.json();
+        return data.content || []; // Ajusta según la estructura de la respuesta
+    } catch (error) {
+        console.error('Error fetching servicios:', error);
+        throw error;
+    }
+};
 
 
