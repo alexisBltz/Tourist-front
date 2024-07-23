@@ -46,8 +46,7 @@ export const getServicios = async (page: number, size: number): Promise<Servicio
         console.log('Datos recibidos del backend:', data); // Log para verificar datos
 
         // Supongamos que el array está en `data.content`
-        const serviciosArray = data.content && Array.isArray(data.content) ? data.content : [];
-        return serviciosArray;
+        return data.content && Array.isArray(data.content) ? data.content : [];
     } catch (error) {
         console.error('Error fetching servicios:', error);
         throw error;
