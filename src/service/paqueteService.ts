@@ -78,3 +78,21 @@ export const getServiciosPorPaquete = async (paqCod: number) => {
         throw error;
     }
 };
+export const deletePaquete = async (id: number) => {
+    const token = getToken();
+    try {
+        const response = await fetch(`${API_URL}/paquete/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Error deleting servicio');
+        }
+    } catch (error) {
+        console.error('Error deleting servicio:', error);
+        throw error;
+    }
+};

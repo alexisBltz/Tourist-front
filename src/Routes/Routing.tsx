@@ -101,6 +101,9 @@ export default function Routing() {
                     element: <ServiciosAdmin />
                 },
                 {
+
+                },
+                {
                     path: "/admin/paquetes",
                     element: <PaquetesAdmin />
                 },
