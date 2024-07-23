@@ -1,42 +1,32 @@
 import { Navigate } from 'react-router-dom';
-import { useEffect, useState, ReactNode } from 'react';
+import { useAuth } from '../service/authContext';
+import { ReactNode, useEffect, useState } from 'react';
 
 interface ProtectedRoutesProps {
     children: React.ReactNode;
     requiredRole?: string;
 }
 
-
 function ProtectedRoutes({ children, requiredRole }: ProtectedRoutesProps) {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userRole, setUserRole] = useState<string | null>(null);
-    //solucion de 5 horas de trabajo
+    const { user } = useAuth();
     const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        const rol = localStorage.getItem('rol');
-        console.log('Token:', token);
-        console.log('Rol:', rol);
-
-        if (token) {
-            console.log("Token encontrado, actualizando estado...");
-            setIsLoggedIn(true);
-            setUserRole(rol);
-        } else {
-            console.log("No se encontró token.");
-        }
-
+        // Considera que la carga se ha completado si hay un usuario o no
         setLoading(false);
+    }, [user]);
 
-    }, []);
-
-    // SOLCUON DE 5h de trabajo
     if (loading) {
         return <div>Loading...</div>;
     }
 
-    if (requiredRole && userRole !== requiredRole) {
-        console.log("Acceso Denegado, redirigiendo a la página principal");
+    if (!user) {
+        // Redirige si no hay usuario autenticado
+        return <Navigate to="/login" />;
+    }
+
+    if (requiredRole && user.rol !== requiredRole) {
+        // Redirige si el rol del usuario no coincide con el requerido
         return <Navigate to="/" />;
     }
 

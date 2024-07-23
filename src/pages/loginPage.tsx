@@ -12,8 +12,8 @@ export default function LoginPage (){
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
-            await login(email, password);
-            const userRole = localStorage.getItem('rol');
+            await login(email, password); // Usa la función login del contexto
+            const userRole = JSON.parse(localStorage.getItem('user') || '{}').rol;
             if (userRole === 'ADMIN') {
                 navigate('/admin');
             } else {

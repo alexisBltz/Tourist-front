@@ -19,6 +19,7 @@ import Ventas from "../pages/admin/ventas.tsx";
 import UnitService from "../pages/UnitService.tsx";
 
 import RegistrarServicio from "../components/Servicios/CrearServicio.tsx";
+import {AuthProvider} from "../service/authContext.tsx";
 
 
 
@@ -115,6 +116,8 @@ export default function Routing() {
 
 
     return (
-        <RouterProvider router={route} />
+        <AuthProvider>
+            <RouterProvider router={route} />
+        </AuthProvider>
     )
 }
