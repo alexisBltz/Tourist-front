@@ -20,6 +20,7 @@ import UnitService from "../pages/UnitService.tsx";
 
 import RegistrarServicio from "../components/Servicios/CrearServicio.tsx";
 import ServiciosDelPaquete from "../components/Paquetes/ServiciosDelPaquete.tsx";
+import ServiciosDelPaqueteAdmin from "../components/Paquetes/ServiciosDelPaqueteAdmin.tsx";
 
 
 
@@ -101,7 +102,8 @@ export default function Routing() {
                     element: <ServiciosAdmin />
                 },
                 {
-
+                    path: "/admin/paquete/:id/servicios/",
+                    element: <ServiciosDelPaqueteAdmin/>
                 },
                 {
                     path: "/admin/paquetes",

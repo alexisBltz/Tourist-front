@@ -12,7 +12,7 @@ const CardPaquete: React.FC<CardPaqueteProps> = ({ id, nombre, imagen, onDelete 
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(`/paquete/${id}/servicios`);
+        navigate(`/admin/paquete/${id}/servicios`);
     };
     return (
         <div className="paquete-card border rounded shadow-lg p-4 m-2 cursor-pointer">
