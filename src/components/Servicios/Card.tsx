@@ -16,7 +16,6 @@ interface ServicioCardProps {
 
 const ServicioCard: React.FC<ServicioCardProps> = ({ id, image, nombre, descripcion, fecha, costo, destino,onDelete  }) => {
 
-const ServicioCard: React.FC<ServicioCardProps> = ({ id, image, nombre, fecha, costo, destino }) => {
     const navigate = useNavigate();  // Crea una instancia de navigate
 
     const handleClick = () => {
