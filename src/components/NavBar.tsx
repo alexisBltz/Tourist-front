@@ -2,23 +2,17 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import {useEffect, useState} from "react";
 import {Link, useLocation} from "react-router-dom";
+import {useAuth} from "../service/authContext.tsx";
+
 
 
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
-/*
-const initialNavigation= [
-    { name: 'Inicio', to: '/', current: false },
-    { name: 'Paquetes Turísticos', to: '/paquetes', current: false },
-    { name: 'Servicios', to: '/servicios', current: false },
-    { name: 'Nosotros', to: '/nosotros', current: false },
-    //{name: 'Login', href: 'login', current: false },
-];
-*/
 export function NavBar({ initialNavigation }) {
     //login
+    const { user, logout } = useAuth();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     //Sombreado rutas
@@ -35,15 +29,12 @@ export function NavBar({ initialNavigation }) {
     }, [location.pathname]);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setIsLoggedIn(true);
-        }
-    }, []);
+        // Actualiza el estado de isLoggedIn basado en el usuario autenticado
+        setIsLoggedIn(!!user);
+    }, [user]);
 
     const handleLogout = () => {
-        // Lógica de cierre de sesión
-        localStorage.removeItem('token');
+        logout();
         setIsLoggedIn(false);
     };
 
@@ -147,7 +138,7 @@ export function NavBar({ initialNavigation }) {
                                                                 href="#"
                                                                 className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                             >
-                                                                Your Profile
+                                                                Tu perfil
                                                             </a>
                                                         )}
                                                     </MenuItem>
