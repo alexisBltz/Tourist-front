@@ -57,3 +57,21 @@ export const deleteUsuario = async (id: number) => {
         throw error;
     }
 };
+export const updateUsuarioRol = async (id: number, nuevoRol: string) => {
+    const token = getToken();
+    try {
+        const response = await fetch(`${API_URL}/user/${id}/rol?nuevoRol=${nuevoRol}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Error updating user role');
+        }
+    } catch (error) {
+        console.error('Error updating user role:', error);
+        throw error;
+    }
+};

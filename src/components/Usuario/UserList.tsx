@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {deleteUsuario, getUsuarios} from "../../service/usuarioService.ts";
+import {deleteUsuario, getUsuarios, updateUsuarioRol} from "../../service/usuarioService.ts";
 
 interface DatosListadoDatosUsuario {
     id: number;
@@ -46,7 +46,16 @@ const UserList: React.FC = () => {
             setError('Error deleting user');
         }
     };
-
+    const handleRoleChange = async (id: number, nuevoRol: string) => {
+        try {
+            await updateUsuarioRol(id, nuevoRol);
+            setUsuarios(usuarios.map(usuario =>
+                usuario.id === id ? { ...usuario, rol: nuevoRol } : usuario
+            ));
+        } catch (err) {
+            setError('Error updating user role');
+        }
+    };
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Lista de Usuarios</h1>
@@ -73,7 +82,17 @@ const UserList: React.FC = () => {
                             <td className="py-4 px-6">{usuario.id}</td>
                             <td className="py-4 px-6">{usuario.login}</td>
                             <td className="py-4 px-6">{usuario.estadoRegistro}</td>
-                            <td className="py-4 px-6">{usuario.rol}</td>
+                            <td className="py-4 px-6">
+                                <select
+                                    value={usuario.rol}
+                                    onChange={(e) => handleRoleChange(usuario.id, e.target.value)}
+                                    className="form-select"
+                                >
+                                    <option value="USER">Usuario</option>
+                                    <option value="ADMIN">Administrador</option>
+                                    <option value="EMPLEADO">Empleado</option>
+                                </select>
+                            </td>
                             <td className="py-4 px-6">{usuario.datosUsuarios[0]?.nombre}</td>
                             <td className="py-4 px-6">{usuario.datosUsuarios[0]?.apellidoPaterno}</td>
                             <td className="py-4 px-6">{usuario.datosUsuarios[0]?.celular}</td>
