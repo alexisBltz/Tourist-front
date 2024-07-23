@@ -1,13 +1,14 @@
 import "../styles/Login.css";
 import React, {useState} from "react";
-import { login } from '../service/authService.ts';
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../service/authContext.tsx";
 
 export default function LoginPage (){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -15,7 +16,9 @@ export default function LoginPage (){
             await login(email, password); // Usa la función login del contexto
             const userRole = JSON.parse(localStorage.getItem('user') || '{}').rol;
             if (userRole === 'ADMIN') {
+                console.log("ENTRANDO A ADMIN")
                 navigate('/admin');
+                console.log("SALIENDo");
             } else {
                 navigate('/');
             }

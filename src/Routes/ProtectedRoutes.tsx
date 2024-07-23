@@ -15,6 +15,7 @@ function ProtectedRoutes({ children, requiredRole }: ProtectedRoutesProps) {
         // Considera que la carga se ha completado si hay un usuario o no
         setLoading(false);
     }, [user]);
+    console.log(user);
 
     if (loading) {
         return <div>Loading...</div>;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';  // Importa useNavigate
-import { getServicio } from '../service/servicioService.ts';
+import { getServicio } from '../../service/servicioService.ts';
 
 const UnitService: React.FC = () => {
     const { id } = useParams<{ id: string }>();

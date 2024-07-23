@@ -16,18 +16,16 @@ import HomeAdmin from "../pages/admin/homeAdmin.tsx";
 import PaquetesAdmin from "../pages/admin/paquetesAdmin.tsx";
 import ServiciosAdmin from "../pages/admin/serviciosAdmin.tsx";
 import Ventas from "../pages/admin/ventas.tsx";
-import UnitService from "../pages/UnitService.tsx";
+import UnitService from "../pages/user/UnitService.tsx";
 
 import RegistrarServicio from "../components/Servicios/CrearServicio.tsx";
-
-import {AuthProvider} from "../service/authContext.tsx";
 
 import ServiciosDelPaquete from "../components/Paquetes/ServiciosDelPaquete.tsx";
 import ServiciosDelPaqueteAdmin from "../components/Paquetes/ServiciosDelPaqueteAdmin.tsx";
 import CrearPaquete from "../components/Paquetes/CrearPaquete.tsx";
 
 
-
+import {AuthProvider} from "../service/authContext.tsx";
 
 
 export default function Routing() {
