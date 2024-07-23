@@ -1,6 +1,23 @@
 const API_URL = 'http://localhost:8091';
 
-export const login = async (email: string, password: string) => {
+export interface User {
+    id: number;
+    login: string;
+    rol: string;
+    datosUsuarios: {
+        id: number;
+        nombre: string;
+        apellidoPaterno: string;
+        apellidoMaterno: string;
+        direccion: string;
+        fechaNacimiento: string;
+        nacionalidad: string;
+        celular: string;
+    }[];
+    token: string;
+}
+
+export const login = async (email: string, password: string): Promise<User> => {
     try {
         const response = await fetch(`${API_URL}/login`, {
             method: 'POST',
@@ -20,11 +37,8 @@ export const login = async (email: string, password: string) => {
         if (!data.token || !data.rol) {
             throw new Error('No hay token ni rol');
         }
-
-        // Guarda el token y rol en localStorage
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('rol', data.rol);
-
+        localStorage.setItem('user', JSON.stringify(data));
+        console.log(data)
         return data;
     } catch (error) {
         console.error('Error during login:', error);
