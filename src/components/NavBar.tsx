@@ -13,7 +13,7 @@ function classNames(...classes) {
 export function NavBar({ initialNavigation }) {
     //login
     const { user, logout } = useAuth();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    //const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     //Sombreado rutas
     const location = useLocation();
@@ -30,12 +30,12 @@ export function NavBar({ initialNavigation }) {
 
     useEffect(() => {
         // Actualiza el estado de isLoggedIn basado en el usuario autenticado
-        setIsLoggedIn(!!user);
+        //setIsLoggedIn(!!user);
     }, [user]);
 
     const handleLogout = () => {
         logout();
-        setIsLoggedIn(false);
+        //setIsLoggedIn(false);
     };
 
     const [scrolled, setScrolled] = useState(false);
@@ -110,7 +110,7 @@ export function NavBar({ initialNavigation }) {
                                 {/*Aca se modifica la posicion del profile*/}
                                 <div className=" inset-y-0 -right-20 flex items-center pr-2 2xl:ml-96 2xl:mr-80">
                                     {
-                                        isLoggedIn ? (
+                                        user ? (
                                             /* Profile dropdown */
                                             <Menu as="div" className="relative ml-3">
                                                 <div>
@@ -183,7 +183,7 @@ export function NavBar({ initialNavigation }) {
                         <DisclosurePanel className="sm:hidden">
                             <div className="space-y-1 px-4 pb-3 pt-20 ">
                                 {currentNavigation.map((item) => (
-                                    <DisclosureButton
+                                    <Link
                                         key={item.name}
                                         as="a"
                                         to={item.to}
@@ -194,7 +194,7 @@ export function NavBar({ initialNavigation }) {
                                         aria-current={item.current ? 'page' : undefined}
                                     >
                                         {item.name}
-                                    </DisclosureButton>
+                                    </Link>
                                 ))}
                             </div>
                         </DisclosurePanel>
