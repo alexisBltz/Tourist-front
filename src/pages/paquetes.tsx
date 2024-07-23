@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // Asegúrate de importar el componente SearchForm
 
 import ListaDePaquetes from "../components/Paquetes/ListaDePaquetes.tsx";
-import DestinosCheckBox from "../components/DestinosCheckBox.tsx";
+
 import SearchForm from "../components/SearchForm.tsx"; // Asegúrate de importar el componente PaquetesCheckBox
 
 export default function Paquetes() {
@@ -28,12 +28,8 @@ export default function Paquetes() {
             </div>
 
             <div className="flex">
-                <div className="ml-10 flex-row bg-gray-200 rounded-lg">
-                    <h1 className="pl-32 pt-16 pr-36 font-serif text-3xl">Paquetes</h1>
-                    <DestinosCheckBox />
-                </div>
 
-                <div className="flex-row justify-center items-center">
+                <div className="mx-10 flex-row justify-center items-center">
                     <ListaDePaquetes searchTerm={submittedTerm} />
                 </div>
             </div>

@@ -6,7 +6,15 @@ export interface PaqueteData {
     imagen: string;
     estadoRegistro: string;
 }
-
+export interface ServicioData {
+    id: number;
+    image: string;
+    descripcion: string;
+    nombre: string;
+    costo: number;
+    destino: string;
+    fecha: string;
+}
 const getToken = (): string | null => {
     return localStorage.getItem('token');
 };
@@ -50,6 +58,25 @@ export const buscarPaquete = async (nombre: string) => {
         return paquetesArray;
     } catch (error) {
         console.error('Error en la recuperación de los paquetes:', error);
+        throw error;
+    }
+};
+export const getServiciosPorPaquete = async (paqCod: number) => {
+    try {
+        const response = await fetch(`${API_URL}/paquete/${paqCod}/servicios`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Error fetching servicios');
+        }
+        const data = await response.json();
+        console.log('Datos recibidos del backend (servicios):', data);
+        return data.content && Array.isArray(data.content) ? data.content : [];
+    } catch (error) {
+        console.error('Error fetching servicios:', error);
         throw error;
     }
 };
