@@ -1,9 +1,21 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { login as loginService } from './authService';
+import { login as loginService, User as AuthServiceUser } from './authService';
 
 interface User {
-    token: string;
+    id: number;
+    login: string;
     rol: string;
+    datosUsuarios: {
+        id: number;
+        nombre: string;
+        apellidoPaterno: string;
+        apellidoMaterno: string;
+        direccion: string;
+        fechaNacimiento: string;
+        nacionalidad: string;
+        celular: string;
+    }[];
+    token: string;
 }
 
 interface AuthContextType {
@@ -18,27 +30,31 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [user, setUser] = useState<User | null>(null);
 
     useEffect(() => {
-        // Carga el usuario desde localStorage
-        const token = localStorage.getItem('token');
-        const rol = localStorage.getItem('rol');
-
-        if (token && rol) {
-            setUser({ token, rol });
+        const storedUser = localStorage.getItem('user');
+        console.log('Stored User:', storedUser);
+        if (storedUser) {
+            try {
+                const parsedUser = JSON.parse(storedUser);
+                setUser(parsedUser);
+            } catch (error) {
+                console.error('Error parsing stored user:', error);
+            }
         }
     }, []);
 
     const login = async (email: string, password: string) => {
         try {
             const data = await loginService(email, password);
-            setUser({ token: data.token, rol: data.rol });
+            setUser(data);
+            console.log("Verificando que llegue: "+data);
+            localStorage.setItem('user', JSON.stringify(data));
         } catch (error) {
             console.error('Login failed:', error);
         }
     };
 
     const logout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('rol');
+        localStorage.removeItem('user');
         setUser(null);
     };
 

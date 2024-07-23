@@ -1,3 +1,5 @@
+import useAuthToken from './useAuthToken';
+
 const API_URL = 'http://localhost:8091';  // Reemplaza con la URL de tu API
 
 export interface DatosListadoDatosUsuario {
@@ -14,11 +16,8 @@ export interface DatosListadoUsuario {
     rol: string;
     datosUsuarios: DatosListadoDatosUsuario[];
 }
-const getToken = (): string | null => {
-    return localStorage.getItem('token');
-};
-export const getUsuarios = async (page: number, size: number): Promise<DatosListadoUsuario[]> => {
-    const token = getToken();
+
+export const getUsuarios = async (page: number, size: number, token: string | null): Promise<DatosListadoUsuario[]> => {
     try {
         const response = await fetch(`${API_URL}/user?page=${page}&size=${size}`, {
             method: 'GET',
@@ -38,9 +37,7 @@ export const getUsuarios = async (page: number, size: number): Promise<DatosList
     }
 };
 
-
-export const deleteUsuario = async (id: number) => {
-    const token = getToken();
+export const deleteUsuario = async (id: number, token: string | null) => {
     try {
         const response = await fetch(`${API_URL}/user/${id}`, {
             method: 'DELETE',
@@ -57,8 +54,8 @@ export const deleteUsuario = async (id: number) => {
         throw error;
     }
 };
-export const updateUsuarioRol = async (id: number, nuevoRol: string) => {
-    const token = getToken();
+
+export const updateUsuarioRol = async (id: number, nuevoRol: string, token: string | null) => {
     try {
         const response = await fetch(`${API_URL}/user/${id}/rol?nuevoRol=${nuevoRol}`, {
             method: 'PUT',
@@ -87,8 +84,7 @@ interface DatosRegistroUsuario {
     estadoRegistro: string;
 }
 
-export const registrarUsuario = async (datosRegistroUsuario: DatosRegistroUsuario) => {
-    const token = getToken();
+export const registrarUsuario = async (datosRegistroUsuario: DatosRegistroUsuario, token: string | null) => {
     try {
         const response = await fetch(`${API_URL}/usuario`, {
             method: 'POST',
