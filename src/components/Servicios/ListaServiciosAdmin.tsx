@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {deleteServicio, getServicios, ServicioData} from "../../service/servicioService.ts";
-import ServicioCard from "./Card.tsx";
+
 import ServicioCardAdmin from "./CardAdmin.tsx";
+import useAuthToken from "../../service/useAuthToken.ts";
 
 const ListaDeServiciosAdmin: React.FC = () => {
     const [servicios, setServicios] = useState<ServicioData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [pagina, setPagina] = useState<number>(0);
     const [hasMore, setHasMore] = useState<boolean>(true);
-
+    const token = useAuthToken();
     const fetchServicios = async (pagina: number) => {
         setLoading(true);
         try {
@@ -39,7 +40,7 @@ const ListaDeServiciosAdmin: React.FC = () => {
 
     const eliminarServicio = async (id: number) => {
         try {
-            await deleteServicio(id);
+            await deleteServicio(id, token);
             // Actualiza la lista de servicios después de eliminar
             setServicios(prev => prev.filter(servicio => servicio.id !== id));
             console.log(`Servicio con ID ${id} eliminado.`);

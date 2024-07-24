@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {getServiciosPorPaquete, ServicioData,} from "../../service/paqueteService.ts";
-import ServicioCard from "../Servicios/Card.tsx";
+
 import ServicioCardAdmin from "../Servicios/CardAdmin.tsx";
 import {deleteServicio} from "../../service/servicioService.ts";
+import useAuthToken from "../../service/useAuthToken.ts";
 // Importa la función
 
 const ServiciosDelPaquete: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [servicios, setServicios] = useState<ServicioData[]>([]);
+    const token = useAuthToken();
     const [loading, setLoading] = useState(true);
     const eliminarServicio = async (id: number) => {
+
         try {
-            await deleteServicio(id);
+            await deleteServicio(id, token);
             // Actualiza la lista de servicios después de eliminar
             setServicios(prev => prev.filter(servicio => servicio.id !== id));
             console.log(`Servicio con ID ${id} eliminado.`);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPaquete } from '../../service/paqueteService';
-import {listarServicios} from "../../service/servicioService.ts"; // Ajusta la ruta según sea necesario
+import {listarServicios} from "../../service/servicioService.ts";
+import useAuthToken from "../../service/useAuthToken.ts"; // Ajusta la ruta según sea necesario
 
 interface Servicio {
     id: number;
@@ -14,7 +15,7 @@ const CrearPaquete: React.FC = () => {
     const [servicios, setServicios] = useState<Servicio[]>([]);
     const [serviciosSeleccionados, setServiciosSeleccionados] = useState<number[]>([]);
     const [loadingServicios, setLoadingServicios] = useState(true);
-
+    const token = useAuthToken();
     useEffect(() => {
         const fetchServicios = async () => {
             try {
@@ -46,7 +47,7 @@ const CrearPaquete: React.FC = () => {
         };
 
         try {
-            await createPaquete(paqueteServicio);
+            await createPaquete(paqueteServicio, token);
             // Manejar el éxito (por ejemplo, redirigir o mostrar un mensaje de éxito)
             alert('Paquete creado exitosamente!');
             // Limpiar formulario si es necesario

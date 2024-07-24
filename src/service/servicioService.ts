@@ -9,9 +9,6 @@ export interface ServicioData {
     costo: number;
     destino: string;
 }
-const getToken = (): string | null => {
-    return localStorage.getItem('token');
-};
 export const getServicio = async (id: number) => {
     try {
         const response = await fetch(`${API_URL}/servicio/${id}`, {
@@ -61,8 +58,8 @@ interface CrearServicio {
     destino: string;
     estadoRegistro: string;
 }
-export const createServicio = async (crearServicio: CrearServicio) => {
-    const token = getToken();
+export const createServicio = async (crearServicio: CrearServicio, token: string|null ) => {
+
     try {
         const response = await fetch(`${API_URL}/servicio`, {
             method: 'POST',
@@ -103,8 +100,8 @@ export const updateServicio = async (id: number, servicioData: Partial<ServicioD
     }
 };
 
-export const deleteServicio = async (id: number) => {
-    const token = getToken();
+export const deleteServicio = async (id: number, token:string |null) => {
+
     try {
         const response = await fetch(`${API_URL}/servicio/${id}`, {
             method: 'DELETE',

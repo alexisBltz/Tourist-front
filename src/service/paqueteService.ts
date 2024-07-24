@@ -15,9 +15,7 @@ export interface ServicioData {
     destino: string;
     fecha: string;
 }
-const getToken = (): string | null => {
-    return localStorage.getItem('token');
-};
+
 export const getPaquetes = async (page: number, size: number): Promise<PaqueteData[]> => {
     try {
         const response = await fetch(`${API_URL}/paquete?page=${page}&size=${size}`, {
@@ -78,8 +76,8 @@ export const getServiciosPorPaquete = async (paqCod: number) => {
         throw error;
     }
 };
-export const deletePaquete = async (id: number) => {
-    const token = getToken();
+export const deletePaquete = async (id: number, token : string |null) => {
+
     try {
         const response = await fetch(`${API_URL}/paquete/${id}`, {
             method: 'DELETE',
@@ -104,8 +102,8 @@ interface PaqueteServicio {
     serviciosCodigos: number[];
 }
 
-export const createPaquete = async (paqueteServicio: PaqueteServicio) => {
-    const token = getToken();
+export const createPaquete = async (paqueteServicio: PaqueteServicio, token:string |null) => {
+
     try {
         const response = await fetch(`${API_URL}/paquete`, {
             method: 'POST',

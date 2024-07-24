@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {createServicio} from "../../service/servicioService.ts";
+import useAuthToken from "../../service/useAuthToken.ts";
 
 interface FormData {
     image: string;
@@ -28,7 +29,7 @@ const CrearServicio: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
-
+    const token = useAuthToken();
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -40,7 +41,7 @@ const CrearServicio: React.FC = () => {
         setError(null);
 
         try {
-            await createServicio(formData);
+            await createServicio(formData, token);
             navigate('/servicios'); // Redirigir a la lista de servicios después de crear uno nuevo
         } catch (err) {
             setError('Error registrando el servicio');
