@@ -15,14 +15,15 @@ export default function LoginPage (){
         try {
             await login(email, password); // Usa la función login del contexto
             const userRole = JSON.parse(localStorage.getItem('user') || '{}').rol;
-            if (userRole === 'ADMIN') {
-                console.log("ENTRANDO A ADMIN")
+            if (userRole === 'ADMIN' || userRole === 'USER') {
                 navigate('/admin');
-                console.log("SALIENDo");
+
             } else {
-                navigate('/');
+                setError('Usuario o Contraseña incorrecta. Por favor, intenta nuevamente.');
+                //navigate('/login');
             }
-        } catch (error) {
+        } catch (err) {
+            setPassword(''); // Limpiar el campo de la contraseña
             setError('Contraseña incorrecta. Por favor, intenta nuevamente.');
         }
     };
