@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import UserList from "../../components/Usuario/UserList.tsx";
+import UserList from "./UserList.tsx";
 import { Outlet } from "react-router-dom";
 
 export default function Usuarios() {

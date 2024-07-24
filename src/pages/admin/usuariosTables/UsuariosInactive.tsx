@@ -30,7 +30,7 @@ const UsuariosInactive: React.FC = () => {
             setError(null); // Resetear el error al iniciar la carga
             try {
                 if (token) {
-                    const data = await getUsuariosInactive(page, 15, token);
+                    const data = await getUsuariosInactive(page, 7, token);
                     setUsuarios(data);
                 } else {
                     setError('No se ha encontrado el token de autenticación');

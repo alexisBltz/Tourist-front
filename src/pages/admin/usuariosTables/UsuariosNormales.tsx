@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {inactivarUsuario, getUsuarios, updateUsuarioRol, activarUsuario} from "../../service/usuarioService.ts";
-import useAuthToken from "../../service/useAuthToken.ts";
+import { updateUsuarioRol, getUsuariosAdmins, getUsuariosNormales } from "../../../service/usuarioService.ts";
+import useAuthToken from "../../../service/useAuthToken.ts";
 
 interface DatosListadoDatosUsuario {
     id: number;
@@ -17,7 +17,7 @@ interface DatosListadoUsuario {
     datosUsuarios: DatosListadoDatosUsuario[];
 }
 
-const UserList: React.FC = () => {
+const UsuariosNormales: React.FC = () => {
     const [usuarios, setUsuarios] = useState<DatosListadoUsuario[]>([]);
     const [page, setPage] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
@@ -30,7 +30,7 @@ const UserList: React.FC = () => {
             setError(null); // Resetear el error al iniciar la carga
             try {
                 if (token) {
-                    const data = await getUsuarios(page, 15, token);
+                    const data = await getUsuariosNormales(page, 7, token);
                     setUsuarios(data);
                 } else {
                     setError('No se ha encontrado el token de autenticación');
@@ -45,34 +45,6 @@ const UserList: React.FC = () => {
         fetchUsers();
     }, [page, token]);
 
-    const handleInactive = async (id: number) => {
-        if (token) {
-            try {
-                await inactivarUsuario(id, token);
-                setUsuarios(usuarios.map(usuario =>
-                    usuario.id === id ? { ...usuario, estadoRegistro: 'I' } : usuario
-                ));
-            } catch (err) {
-                setError('Error deleting user: ' + (err as Error).message);
-            }
-        } else {
-            setError('No se ha encontrado el token de autenticación');
-        }
-    };
-    const handleActivate = async (id: number) => {
-        if (token) {
-            try {
-                await activarUsuario(id, token);
-                setUsuarios(usuarios.map(usuario =>
-                    usuario.id === id ? { ...usuario, estadoRegistro: 'A' } : usuario
-                ));
-            } catch (err) {
-                setError('Error deleting user: ' + (err as Error).message);
-            }
-        } else {
-            setError('No se ha encontrado el token de autenticación');
-        }
-    };
 
     const handleRoleChange = async (id: number, nuevoRol: string) => {
         if (token) {
@@ -91,7 +63,7 @@ const UserList: React.FC = () => {
 
     return (
         <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4">Lista de Usuarios</h1>
+            <h1 className="text-2xl font-bold mb-4">Lista de Usuarios Inactivos</h1>
             {error && <p className="text-red-500 mb-4">{error}</p>}
             {loading ? (
                 <p>Cargando...</p>
@@ -100,22 +72,17 @@ const UserList: React.FC = () => {
                     <table className="w-full bg-white border border-gray-200">
                         <thead>
                         <tr className="w-full bg-gray-80 border-b">
-                            <th className="py-3 px-6 text-center">ID</th>
-                            <th className="py-3 px-6 text-center">Login</th>
-                            <th className="py-3 px-6 text-center">Estado</th>
+                            <th className="py-3 px-6 text-center">Email</th>
                             <th className="py-3 px-6 text-center">Rol</th>
                             <th className="py-3 px-6 text-center">Nombre</th>
                             <th className="py-3 px-6 text-center">Apellido Paterno</th>
                             <th className="py-3 px-6 text-center">Celular</th>
-                            <th className="py-3 px-6 text-center">Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
                         {usuarios.map((usuario) => (
                             <tr key={usuario.id} className="border-b">
-                                <td className="py-4 px-6">{usuario.id}</td>
                                 <td className="py-4 px-6">{usuario.login}</td>
-                                <td className="py-4 px-6">{usuario.estadoRegistro}</td>
                                 <td className="py-4 px-6">
                                     <select
                                         value={usuario.rol}
@@ -130,20 +97,6 @@ const UserList: React.FC = () => {
                                 <td className="py-4 px-6">{usuario.datosUsuarios[0]?.nombre}</td>
                                 <td className="py-4 px-6">{usuario.datosUsuarios[0]?.apellidoPaterno}</td>
                                 <td className="py-4 px-6">{usuario.datosUsuarios[0]?.celular}</td>
-                                <td className="py-4 px-6">
-                                    <button
-                                        onClick={() => handleInactive(usuario.id)}
-                                        className="text-red-500 hover:text-red-700"
-                                    >
-                                        Inactivar
-                                    </button>
-                                    <button
-                                        onClick={() => handleActivate(usuario.id)}
-                                        className="text-red-500 hover:text-red-700"
-                                    >
-                                        Activar
-                                    </button>
-                                </td>
                             </tr>
                         ))}
                         </tbody>
@@ -169,4 +122,4 @@ const UserList: React.FC = () => {
     );
 };
 
-export default UserList;
+export default UsuariosNormales;

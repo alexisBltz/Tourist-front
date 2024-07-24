@@ -11,7 +11,7 @@ import Nosotros from "../pages/user/nosotros.tsx";
 import LayoutUser from "../layouts/UserLayout.tsx";
 import AdminLayout from "../layouts/AdminLayout.tsx";
 import ProtectedRoutes from "./ProtectedRoutes.tsx";
-import Usuarios from "../pages/admin/usuarios.tsx";
+import Usuarios from "../pages/admin/usuariosTables/usuarios.tsx";
 import HomeAdmin from "../pages/admin/homeAdmin.tsx";
 import PaquetesAdmin from "../pages/admin/paquetesAdmin.tsx";
 import ServiciosAdmin from "../pages/admin/serviciosAdmin.tsx";
@@ -28,11 +28,9 @@ import CrearPaquete from "../components/Paquetes/CrearPaquete.tsx";
 import {AuthProvider} from "../service/authContext.tsx";
 import UsuariosActive from "../pages/admin/usuariosTables/UsuariosActive.tsx";
 import UsuariosInactive from "../pages/admin/usuariosTables/UsuariosInactive.tsx";
+import UsuariosAdmin from "../pages/admin/usuariosTables/UsuariosAdmin.tsx";
+import UsuariosNormales from "../pages/admin/usuariosTables/UsuariosNormales.tsx";
 
-
-function UsuariosAdmins() {
-    return null;
-}
 
 export default function Routing() {
 
@@ -112,7 +110,11 @@ export default function Routing() {
                         },
                         {
                             path: "admins",
-                            element: <UsuariosAdmins />
+                            element: <UsuariosAdmin />
+                        },
+                        {
+                          path: "onlyUsers",
+                          element: <UsuariosNormales/>
                         },
                     ]
                 },

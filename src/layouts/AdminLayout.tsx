@@ -17,6 +17,7 @@ const navOptions = {
         { label: 'Listar Usuarios Activos', path: '/admin/usuarios/active' },
         { label: 'Listar Usuarios Inactivos', path: '/admin/usuarios/inactive' },
         { label: 'Listar Administradores', path: '/admin/usuarios/admins' },
+        { label: 'Listar Clientes', path: '/admin/usuarios/onlyUsers' },
     ],
     '/admin/servicios': [
         { label: 'Crear Servicio', path: '/admin/servicios/crear' },
