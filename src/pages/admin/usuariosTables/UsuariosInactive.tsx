@@ -75,7 +75,7 @@ const UsuariosInactive: React.FC = () => {
 
     return (
         <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4">Lista de Usuarios Activos</h1>
+            <h1 className="text-2xl font-bold mb-4">Lista de Usuarios Inactivos</h1>
             {error && <p className="text-red-500 mb-4">{error}</p>}
             {loading ? (
                 <p>Cargando...</p>
