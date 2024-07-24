@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { deleteUsuario, getUsuarios, updateUsuarioRol } from "../../service/usuarioService.ts";
+import {inactivarUsuario, getUsuarios, updateUsuarioRol, activarUsuario} from "../../service/usuarioService.ts";
 import useAuthToken from "../../service/useAuthToken.ts";
 
 interface DatosListadoDatosUsuario {
@@ -45,11 +45,27 @@ const UserList: React.FC = () => {
         fetchUsers();
     }, [page, token]);
 
-    const handleDelete = async (id: number) => {
+    const handleInactive = async (id: number) => {
         if (token) {
             try {
-                await deleteUsuario(id, token);
-                setUsuarios(usuarios.filter(usuario => usuario.id !== id));
+                await inactivarUsuario(id, token);
+                setUsuarios(usuarios.map(usuario =>
+                    usuario.id === id ? { ...usuario, estadoRegistro: 'I' } : usuario
+                ));
+            } catch (err) {
+                setError('Error deleting user: ' + (err as Error).message);
+            }
+        } else {
+            setError('No se ha encontrado el token de autenticación');
+        }
+    };
+    const handleActivate = async (id: number) => {
+        if (token) {
+            try {
+                await activarUsuario(id, token);
+                setUsuarios(usuarios.map(usuario =>
+                    usuario.id === id ? { ...usuario, estadoRegistro: 'A' } : usuario
+                ));
             } catch (err) {
                 setError('Error deleting user: ' + (err as Error).message);
             }
@@ -116,10 +132,16 @@ const UserList: React.FC = () => {
                                 <td className="py-4 px-6">{usuario.datosUsuarios[0]?.celular}</td>
                                 <td className="py-4 px-6">
                                     <button
-                                        onClick={() => handleDelete(usuario.id)}
+                                        onClick={() => handleInactive(usuario.id)}
                                         className="text-red-500 hover:text-red-700"
                                     >
-                                        Eliminar
+                                        Inactivar
+                                    </button>
+                                    <button
+                                        onClick={() => handleActivate(usuario.id)}
+                                        className="text-red-500 hover:text-red-700"
+                                    >
+                                        Activar
                                     </button>
                                 </td>
                             </tr>

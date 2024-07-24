@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { deleteUsuario, getUsuarios, updateUsuarioRol } from "../../../service/usuarioService.ts";
+import { inactivarUsuario, getUsuariosActive, updateUsuarioRol } from "../../../service/usuarioService.ts";
 import useAuthToken from "../../../service/useAuthToken.ts";
 
 interface DatosListadoDatosUsuario {
@@ -30,7 +30,7 @@ const UsuariosActive: React.FC = () => {
             setError(null); // Resetear el error al iniciar la carga
             try {
                 if (token) {
-                    const data = await getUsuarios(page, 15, token);
+                    const data = await getUsuariosActive(page, 15, token);
                     setUsuarios(data);
                 } else {
                     setError('No se ha encontrado el token de autenticación');
@@ -48,7 +48,7 @@ const UsuariosActive: React.FC = () => {
     const handleDelete = async (id: number) => {
         if (token) {
             try {
-                await deleteUsuario(id, token);
+                await inactivarUsuario(id, token);
                 setUsuarios(usuarios.filter(usuario => usuario.id !== id));
             } catch (err) {
                 setError('Error deleting user: ' + (err as Error).message);
@@ -75,7 +75,7 @@ const UsuariosActive: React.FC = () => {
 
     return (
         <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4">Lista de Usuarios</h1>
+            <h1 className="text-2xl font-bold mb-4">Lista de Usuarios Activos</h1>
             {error && <p className="text-red-500 mb-4">{error}</p>}
             {loading ? (
                 <p>Cargando...</p>
@@ -84,22 +84,17 @@ const UsuariosActive: React.FC = () => {
                     <table className="w-full bg-white border border-gray-200">
                         <thead>
                         <tr className="w-full bg-gray-80 border-b">
-                            <th className="py-3 px-6 text-center">ID</th>
-                            <th className="py-3 px-6 text-center">Login</th>
-                            <th className="py-3 px-6 text-center">Estado</th>
+                            <th className="py-3 px-6 text-center">Email</th>
                             <th className="py-3 px-6 text-center">Rol</th>
                             <th className="py-3 px-6 text-center">Nombre</th>
                             <th className="py-3 px-6 text-center">Apellido Paterno</th>
                             <th className="py-3 px-6 text-center">Celular</th>
-                            <th className="py-3 px-6 text-center">Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
                         {usuarios.map((usuario) => (
                             <tr key={usuario.id} className="border-b">
-                                <td className="py-4 px-6">{usuario.id}</td>
                                 <td className="py-4 px-6">{usuario.login}</td>
-                                <td className="py-4 px-6">{usuario.estadoRegistro}</td>
                                 <td className="py-4 px-6">
                                     <select
                                         value={usuario.rol}
@@ -114,14 +109,6 @@ const UsuariosActive: React.FC = () => {
                                 <td className="py-4 px-6">{usuario.datosUsuarios[0]?.nombre}</td>
                                 <td className="py-4 px-6">{usuario.datosUsuarios[0]?.apellidoPaterno}</td>
                                 <td className="py-4 px-6">{usuario.datosUsuarios[0]?.celular}</td>
-                                <td className="py-4 px-6">
-                                    <button
-                                        onClick={() => handleDelete(usuario.id)}
-                                        className="text-red-500 hover:text-red-700"
-                                    >
-                                        Eliminar
-                                    </button>
-                                </td>
                             </tr>
                         ))}
                         </tbody>

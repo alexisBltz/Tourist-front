@@ -15,9 +15,9 @@ export interface DatosListadoUsuario {
     datosUsuarios: DatosListadoDatosUsuario[];
 }
 
-export const getUsuarios = async (page: number, size: number, token: string | null): Promise<DatosListadoUsuario[]> => {
+export const getUsuariosInactive = async (page: number, size: number, token: string | null): Promise<DatosListadoUsuario[]> => {
     try {
-        const response = await fetch(`${API_URL}/user?page=${page}&size=${size}`, {
+        const response = await fetch(`${API_URL}/user/inactive?page=${page}&size=${size}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,9 +35,49 @@ export const getUsuarios = async (page: number, size: number, token: string | nu
     }
 };
 
-export const deleteUsuario = async (id: number, token: string | null) => {
+export const getUsuariosActive = async (page: number, size: number, token: string | null): Promise<DatosListadoUsuario[]> => {
     try {
-        const response = await fetch(`${API_URL}/user/${id}`, {
+        const response = await fetch(`${API_URL}/user/active?page=${page}&size=${size}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Error fetching usuarios');
+        }
+        const data = await response.json();
+        return data.content; // Ajusta según la estructura de tu API
+    } catch (error) {
+        console.error('Error fetching usuarios:', error);
+        throw error;
+    }
+};
+
+export const getUsuarios = async (page: number, size: number, token: string | null): Promise<DatosListadoUsuario[]> => {
+    try {
+        const response = await fetch(`${API_URL}/user/todos?page=${page}&size=${size}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Error fetching usuarios');
+        }
+        const data = await response.json();
+        return data.content; // Ajusta según la estructura de tu API
+    } catch (error) {
+        console.error('Error fetching usuarios:', error);
+        throw error;
+    }
+};
+
+export const inactivarUsuario = async (id: number, token: string | null) => {
+    try {
+        const response = await fetch(`${API_URL}/user/inactivar/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,6 +92,24 @@ export const deleteUsuario = async (id: number, token: string | null) => {
         throw error;
     }
 };
+export const activarUsuario = async (id: number, token: string | null) => {
+    try {
+        const response = await fetch(`${API_URL}/user/activar/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Error activando usuario');
+        }
+    } catch (error) {
+        console.error('Error activando usuario:', error);
+        throw error;
+    }
+};
+
 
 export const updateUsuarioRol = async (id: number, nuevoRol: string, token: string | null) => {
     try {

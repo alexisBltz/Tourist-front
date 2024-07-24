@@ -15,7 +15,7 @@ export default function Usuarios() {
                     <UserList />
                 </div>
             )}
-            <div className="lg:w-3/4 w-full flex flex-col p-4">
+            <div className="w-full bg-gray-100 p-4">
                 <div className="flex-1">
                     <Outlet />
                 </div>
