@@ -1,5 +1,3 @@
-import useAuthToken from './useAuthToken';
-
 const API_URL = 'http://localhost:8091';  // Reemplaza con la URL de tu API
 
 export interface DatosListadoDatosUsuario {

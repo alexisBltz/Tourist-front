@@ -55,7 +55,10 @@ export function NavBar({ initialNavigation }) {
     }, []);
 
     const isHomePage =
-        location.pathname === '/' || location.pathname === '/login' || location.pathname === '/registrarse';
+        location.pathname === '/' ||
+        location.pathname === '/login' ||
+        location.pathname === '/registrarse' ||
+        location.pathname === '/admin';
     //console.log(isHomePage);
 
     return (

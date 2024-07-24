@@ -26,7 +26,13 @@ import CrearPaquete from "../components/Paquetes/CrearPaquete.tsx";
 
 
 import {AuthProvider} from "../service/authContext.tsx";
+import UsuariosActive from "../pages/admin/usuariosTables/UsuariosActive.tsx";
+import UsuariosInactive from "../pages/admin/usuariosTables/UsuariosInactive.tsx";
 
+
+function UsuariosAdmins() {
+    return null;
+}
 
 export default function Routing() {
 
@@ -94,7 +100,21 @@ export default function Routing() {
                 },
                 {
                     path: "/admin/usuarios",
-                    element: <Usuarios />
+                    element: <Usuarios />,
+                    children: [
+                        {
+                            path: "active",
+                            element: <UsuariosActive />
+                        },
+                        {
+                            path: "inactive",
+                            element: <UsuariosInactive />
+                        },
+                        {
+                            path: "admins",
+                            element: <UsuariosAdmins />
+                        },
+                    ]
                 },
                 {
                     path: "servicios/crear",

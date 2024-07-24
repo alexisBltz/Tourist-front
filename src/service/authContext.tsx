@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { login as loginService, User as AuthServiceUser } from './authService';
+import { login as loginService } from './authService';
 
 interface User {
     id: number;
