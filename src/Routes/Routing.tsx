@@ -13,7 +13,7 @@ import AdminLayout from "../layouts/AdminLayout.tsx";
 import ProtectedRoutes from "./ProtectedRoutes.tsx";
 import Usuarios from "../pages/admin/usuariosTables/usuarios.tsx";
 import HomeAdmin from "../pages/admin/homeAdmin.tsx";
-import PaquetesAdmin from "../pages/admin/paquetesAdmin.tsx";
+import PaquetesAdmin from "../pages/admin/paquetesInfor/paquetesAdmin.tsx";
 
 import Ventas from "../pages/admin/ventas.tsx";
 import UnitService from "../pages/user/UnitService.tsx";
@@ -21,7 +21,7 @@ import UnitService from "../pages/user/UnitService.tsx";
 
 import RegistrarServicio from "../components/Servicios/CrearServicio.tsx";
 import ServiciosDelPaquete from "../components/Paquetes/ServiciosDelPaquete.tsx";
-import ServiciosDelPaqueteAdmin from "../components/Paquetes/ServiciosDelPaqueteAdmin.tsx";
+import ServiciosDelPaqueteAdmin from "../pages/admin/paquetesInfor/ServiciosDelPaqueteAdmin.tsx";
 import CrearPaquete from "../components/Paquetes/CrearPaquete.tsx";
 
 
@@ -142,20 +142,28 @@ export default function Routing() {
                     ]
                 },
                 {
-                    path: "/admin/servicios",
-                    element: <ServiciosAdmin />
-                },
-                {
-                    path: "/admin/paquetes/crear",
-                    element: <CrearPaquete/>
-                },
-                {
-                    path: "/admin/paquete/:id/servicios/",
-                    element: <ServiciosDelPaqueteAdmin/>
-                },
-                {
                     path: "/admin/paquetes",
-                    element: <PaquetesAdmin />
+                    element: <PaquetesAdmin/>,
+                    children:[
+                        {
+                            path: "crear",
+                            element: <CrearPaquete/>
+                        },
+                        {
+                            path: ":id/servicios/",
+                            element: <ServiciosDelPaqueteAdmin/>
+                        },
+                        /*
+                        {
+                            path: "active",
+                            //element: <PaqueteActive/>
+                        },
+                        {
+                            path: "inactive",
+                            //element: <PaqueteInactive/>
+                        },
+                        */
+                    ]
                 },
                 {
                     path: "/admin/ventas",

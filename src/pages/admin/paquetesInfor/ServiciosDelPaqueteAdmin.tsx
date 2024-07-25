@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {getServiciosPorPaquete, ServicioData,} from "../../service/paqueteService.ts";
+import {getServiciosPorPaquete, ServicioData,} from "../../../service/paqueteService.ts";
 
-import ServicioCardAdmin from "../Servicios/CardAdmin.tsx";
-import {inactivarServicio} from "../../service/servicioService.ts";
-import useAuthToken from "../../service/useAuthToken.ts";
+import ServicioCardAdmin from "../../../components/Servicios/CardAdmin.tsx";
+import {inactivarServicio} from "../../../service/servicioService.ts";
+import useAuthToken from "../../../service/useAuthToken.ts";
 // Importa la función
 
 const ServiciosDelPaquete: React.FC = () => {
