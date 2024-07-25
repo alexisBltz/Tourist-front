@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPaquete } from '../../service/paqueteService';
-import {listarServicios} from "../../service/servicioService.ts";
+import {getServiciosActivos, listarServicios} from "../../service/servicioService.ts";
 import useAuthToken from "../../service/useAuthToken.ts"; // Ajusta la ruta según sea necesario
 
 interface Servicio {
@@ -19,7 +19,7 @@ const CrearPaquete: React.FC = () => {
     useEffect(() => {
         const fetchServicios = async () => {
             try {
-                const data = await listarServicios(); // Implementa esta función en tu servicio
+                const data = await getServiciosActivos(); // Implementa esta función en tu servicio
                 setServicios(data);
             } catch (error) {
                 console.error('Error al obtener servicios:', error);
