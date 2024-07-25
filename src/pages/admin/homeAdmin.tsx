@@ -1,5 +1,4 @@
 import {useAuth} from "../../service/authContext.tsx";
-import "../../styles/Login.css"
 
 export default function HomeAdmin (){
 
@@ -13,7 +12,7 @@ export default function HomeAdmin (){
         : '';
     return(
         <div>
-            <h1 className="text-center p-96 login-page text-6xl font-semibold"> BIENVENIDO {nombreCompleto}</h1>
+            <h1 className="text-center p-96 text-6xl font-semibold"> BIENVENIDO {nombreCompleto}</h1>
         </div>
     )
 }
