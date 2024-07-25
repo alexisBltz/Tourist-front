@@ -9,23 +9,23 @@ export default function HomeUser() {
     const slides = [
         {
             nombre: "AREQUIPA",
-            img:"https://upload.wikimedia.org/wikipedia/commons/a/a3/Volcano_Misti%2C_Peru.jpg",
-            descripcion: "bla bla bla bla",
+            img: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Volcano_Misti%2C_Peru.jpg",
+            descripcion: "Explora la belleza colonial de Arequipa",
         },
         {
             nombre: "CUZCO",
-            img:"https://elperuano.pe/fotografia/thumbnail/2022/07/12/000189059M.jpg",
-            descripcion: "bla bla bla bla bla",
+            img: "https://elperuano.pe/fotografia/thumbnail/2022/07/12/000189059M.jpg",
+            descripcion: "Antigua capital del Imperio Inca.",
         },
         {
             nombre: "AREQUIPA",
-            img:"https://upload.wikimedia.org/wikipedia/commons/a/a3/Volcano_Misti%2C_Peru.jpg",
-            descripcion: "bla bla bla bla",
+            img: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Volcano_Misti%2C_Peru.jpg",
+            descripcion: "El majestuoso Volcán Misti como telón de fondo.",
         },
         {
             nombre: "CUZCO",
-            img:"https://elperuano.pe/fotografia/thumbnail/2022/07/12/000189059M.jpg",
-            descripcion: "bla bla bla bla bla",
+            img: "https://elperuano.pe/fotografia/thumbnail/2022/07/12/000189059M.jpg",
+            descripcion: "Descubre la histórica ciudad de Cuzco.",
         },
     ]
     const [servicios, setServicios] = useState<ServicioData[]>([]);

@@ -35,7 +35,7 @@ export default function Carousel({ slides, autoSlide, autoSlideInterval = 3000 }
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center truncate">
 
                             <h1 className="sm:text-9xl font-bold text-white p-4 text-5xl">{slide.nombre}</h1>
-                            <h1 className="sm:text-6xl text-white p-4 text-3xl">{slide.descripcion}</h1>
+                            <h1 className="sm:text-5xl text-white p-4 text-3xl">{slide.descripcion}</h1>
 
                         </div>
                     </div>
