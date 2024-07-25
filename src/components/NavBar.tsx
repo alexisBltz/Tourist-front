@@ -144,7 +144,16 @@ export function NavBar({ initialNavigation }) {
                                                     </MenuItem>
                                                     */}
                                                         {
-                                                            (admin && location.pathname === "/")? (
+                                                            (admin &&
+                                                            (
+                                                                location.pathname === "/" ||
+                                                                location.pathname === "/servicios" ||
+                                                                location.pathname === "/paquetes" ||
+                                                                location.pathname === "/nosotros"
+                                                            )
+                                                            )
+                                                                ?
+                                                                (
                                                                 <MenuItem>
                                                                     {({ focus }) => (
                                                                         <a

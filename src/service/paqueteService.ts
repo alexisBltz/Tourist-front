@@ -14,6 +14,7 @@ export interface ServicioData {
     costo: number;
     destino: string;
     fecha: string;
+    estadoRegistro: string;
 }
 
 export const getPaquetes = async (page: number, size: number): Promise<PaqueteData[]> => {

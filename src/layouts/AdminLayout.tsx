@@ -3,7 +3,7 @@ import Footer from "../components/Footer.tsx";
 import { Outlet, useLocation } from "react-router-dom";
 import { AuthProvider } from '../service/authContext.tsx';
 import NavBarRight from "../pages/admin/NavBarRight.tsx";
-
+import "../styles/Login.css"
 const initialNavigation = [
     { name: 'Usuarios', to: '/admin/usuarios', current: false },
     { name: 'Servicios', to: '/admin/servicios', current: false },
@@ -46,7 +46,7 @@ export default function AdminLayout() {
     return (
         <AuthProvider>
             <NavBar initialNavigation={initialNavigation} />
-            <div className="flex flex-col lg:flex-row min-h-screen p-16">
+            <div className="flex flex-col lg:flex-row min-h-screen p-16 login-page">
                 {showNavBarRight && (
                     <div className="lg:w-1/4 w-full bg-gray-100 p-4">
                         <NavBarRight options={options} />

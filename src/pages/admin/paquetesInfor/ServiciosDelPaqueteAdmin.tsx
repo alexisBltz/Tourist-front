@@ -59,6 +59,7 @@ const ServiciosDelPaquete: React.FC = () => {
                                 fecha={servicio.fecha}
                                 costo={servicio.costo}
                                 destino={servicio.destino}
+                                estadoRegistro={servicio.estadoRegistro}
                                 onInactivar={eliminarServicio}
                             />
                         );
