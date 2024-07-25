@@ -1,3 +1,5 @@
+import {getServicio} from "../../service/servicioService.ts";
+import {useNavigate} from "react-router-dom";
 
 interface ServicioCardProps {
     id: number;
@@ -15,9 +17,16 @@ interface ServicioCardProps {
 const ServicioCardAdmin: React.FC<ServicioCardProps>
     = ({id, image, nombre,
            descripcion, fecha, costo, destino,estadoRegistro, onActive , onInactive  }) => {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        // Aquí podrías obtener el servicio si es necesario antes de redirigir
+        getServicio(id);  // Solo si necesitas obtener información del servicio
+        navigate(`/servicios/${id}`);  // Redirige a la página de detalles del servicio
+    };
     return (
         <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1">
-            <img className="w-full" src={image} alt={nombre} />
+            <img className="w-full cursor-pointer" src={image} alt={nombre}
+                 onClick={handleClick} />
             <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{nombre}</div>
                 <p className="text-gray-700 text-base">{descripcion}</p>
