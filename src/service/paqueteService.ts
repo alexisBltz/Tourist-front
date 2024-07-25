@@ -1,5 +1,5 @@
 
-const API_URL = 'http://localhost:8091';
+const API_URL = import.meta.env.VITE_API_URL;
 export interface PaqueteData {
     id: number;
     nombre: string;

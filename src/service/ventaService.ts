@@ -1,6 +1,8 @@
 // src/services/ventaService.ts
 
-const API_URL = 'http://localhost:8091/venta';
+const API_URL_ANTES = import.meta.env.VITE_API_URL;
+
+const API_URL = API_URL_ANTES + "/venta";
 
 export const getVentas = async (page: number, size: number, token: string | null): Promise<DatosListadoVenta[]> => {
 
