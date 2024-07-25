@@ -37,7 +37,7 @@ const DestinosCheckbox: React.FC = () => {
         <div>
             {destinos.map((destino) => (
                 <div key={destino}>
-                    <div className="flex p-6 pl-36">
+                    <div className="flex px-10 py-5">
                     <Checkbox
                         checked={selectedDestinos.has(destino)}
                         onChange={() => handleCheckboxChange(destino)}
@@ -45,7 +45,7 @@ const DestinosCheckbox: React.FC = () => {
                     >
                         <CheckIcon className="hidden size-4 fill-black group-data-[checked]:block" />
                     </Checkbox>
-                    <h1 className="text-center ml-2">{destino}</h1>
+                    <h1 className="text-center mx-5">{destino}</h1>
                     </div>
                 </div>
             ))}

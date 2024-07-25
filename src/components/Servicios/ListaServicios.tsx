@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getServicios, ServicioData, buscarServicio } from "../../service/servicioService";
 import ServicioCard from "./Card.tsx";
 
-const ListaDeServicios: React.FC<
+const ListaServicios: React.FC<
     { searchTerm?: string, destinosSeleccionados: string[] }> = ({ searchTerm, destinosSeleccionados }) => {
     const [servicios, setServicios] = useState<ServicioData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -69,7 +69,7 @@ const ListaDeServicios: React.FC<
     }
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-wrap items-center">
             <div className="flex flex-wrap justify-center">
                 {servicios.map(servicio => (
                     <ServicioCard
@@ -98,4 +98,4 @@ const ListaDeServicios: React.FC<
     );
 };
 
-export default ListaDeServicios;
+export default ListaServicios;
