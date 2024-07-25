@@ -35,6 +35,7 @@ import UsuariosNormales from "../pages/admin/usuariosTables/UsuariosNormales.tsx
 import ServiciosAdmin from "../pages/admin/serviciosInfor/ServiciosAdmin.tsx";
 import ServiceActive from "../pages/admin/serviciosInfor/ServiciosActive.tsx";
 import ServiceInactive from "../pages/admin/serviciosInfor/ServiceInactive.tsx";
+import CambiarClave from "../pages/cambiarClave.tsx";
 
 
 export default function Routing() {
@@ -78,15 +79,19 @@ export default function Routing() {
                     element: <Nosotros />
                 },
                 {
-                    path: "*",
-                    element: <NotFound/>
-                },
-                {
                     path: "paquete/:id/servicios",
                     element: <ServiciosDelPaquete/>
                 }
             ],
 
+        },
+        {
+            path: "*",
+            element: <NotFound/>
+        },
+        {
+            path: "cambiarClave",
+            element: <CambiarClave/>
         },
         {
             path: "/admin",
@@ -165,15 +170,6 @@ export default function Routing() {
                         */
                     ]
                 },
-                {
-                    path: "/admin/ventas",
-                    element: <Ventas />
-                },
-                {
-                    path: "*",
-                    element: <NotFound/>
-                },
-
             ],
         },
 
