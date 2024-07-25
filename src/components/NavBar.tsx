@@ -13,6 +13,7 @@ function classNames(...classes) {
 export function NavBar({ initialNavigation }) {
     //login
     const { user, logout } = useAuth();
+    const admin = JSON.parse(localStorage.getItem('user') || '{}').rol;
     //const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     //Sombreado rutas
@@ -28,14 +29,9 @@ export function NavBar({ initialNavigation }) {
         //console.log(updatedNavigation);
     }, [location.pathname]);
 
-    useEffect(() => {
-        // Actualiza el estado de isLoggedIn basado en el usuario autenticado
-        //setIsLoggedIn(!!user);
-    }, [user]);
 
     const handleLogout = () => {
         logout();
-        //setIsLoggedIn(false);
     };
 
     const [scrolled, setScrolled] = useState(false);
@@ -114,27 +110,28 @@ export function NavBar({ initialNavigation }) {
                                 <div className=" inset-y-0 -right-20 flex items-center pr-2 2xl:ml-96 2xl:mr-80">
                                     {
                                         user ? (
-                                            /* Profile dropdown */
-                                            <Menu as="div" className="relative ml-3">
-                                                <div>
-                                                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm ">
-                                                        <span className=" -inset-1.5" />
-                                                        <span className="sr-only">Open user menu</span>
-                                                        <img
-                                                            className="h-8 w-8 rounded-full"
-                                                            src="https://maria-belen.s3.amazonaws.com/img/usr.png"
-                                                            alt=""
-                                                        />
-                                                    </MenuButton>
-                                                </div>
-                                                <MenuItems
-                                                    transition
-                                                    className="right-0 z-10 mt-28 w-48 origin-top-right rounded-md bg-white py-1
+                                                /* Profile dropdown */
+                                                <Menu as="div" className="relative ml-3 ">
+                                                    <div>
+                                                        <MenuButton className="relative flex rounded-full bg-gray-800 text-sm ">
+                                                            <span className=" -inset-1.5" />
+                                                            <span className="sr-only">Open user menu</span>
+                                                            <img
+                                                                className="h-8 w-8 rounded-full"
+                                                                src="https://maria-belen.s3.amazonaws.com/img/usr.png"
+                                                                alt=""
+                                                            />
+                                                        </MenuButton>
+                                                    </div>
+                                                    <MenuItems
+                                                        transition
+                                                        className="right-0 z-10 mt-28 w-48 origin-top-right rounded-md bg-white py-1
                                             shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none
                                             data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0
                                             data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out
                                             data-[leave]:ease-in"
-                                                >
+                                                    >
+                                                        {/*
                                                     <MenuItem>
                                                         {({ focus }) => (
                                                             <a
@@ -145,34 +142,40 @@ export function NavBar({ initialNavigation }) {
                                                             </a>
                                                         )}
                                                     </MenuItem>
-                                                    <MenuItem>
-                                                        {({ focus }) => (
-                                                            <a
-                                                                href="#"
-                                                                className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                            >
-                                                                Settings
-                                                            </a>
-                                                        )}
-                                                    </MenuItem>
-                                                    <MenuItem>
-                                                        {({ focus }) => (
-                                                            <a
-                                                                onClick={handleLogout}
-                                                                href="/"
-                                                                className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                            >
-                                                                Salir
-                                                            </a>
-                                                        )}
-                                                    </MenuItem>
-                                                </MenuItems>
-                                            </Menu>
-                                        ):
+                                                    */}
+                                                        {
+                                                            (admin && location.pathname === "/")? (
+                                                                <MenuItem>
+                                                                    {({ focus }) => (
+                                                                        <a
+                                                                            href="/admin"
+                                                                            className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                                        >
+                                                                            Cambiar a admin
+                                                                        </a>
+                                                                    )}
+                                                                </MenuItem>
+                                                            ): null
+                                                        }
+
+                                                        <MenuItem>
+                                                            {({ focus }) => (
+                                                                <a
+                                                                    onClick={handleLogout}
+                                                                    href="/"
+                                                                    className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                                >
+                                                                    Salir
+                                                                </a>
+                                                            )}
+                                                        </MenuItem>
+                                                    </MenuItems>
+                                                </Menu>
+                                            ):
                                             /*BOTON POR DEFECTO DEL LOGIN UWU*/
                                             <Link
                                                 to={"/login"}
-                                                  className="bg-gray-700 text-white rounded-md px-3 py-2 text-sm font-medium"
+                                                className="bg-gray-700 text-white rounded-md px-3 py-2 text-sm font-medium"
 
                                             >
                                                 Login

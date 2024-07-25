@@ -7,7 +7,7 @@ export default function HomeAdmin (){
 
     // Asegúrate de que datosUsuarios existe y tiene al menos un elemento
     const nombreCompleto = user?.datosUsuarios?.length > 0 ?
-        `${user?.datosUsuarios[0].nombre} 
+        `${user?.datosUsuarios[0].nombre.toUpperCase()} 
         ${user?.datosUsuarios[0].apellidoPaterno.toUpperCase()} 
         ${user?.datosUsuarios[0].apellidoMaterno.toUpperCase()}`
         : '';
