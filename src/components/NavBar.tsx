@@ -13,7 +13,7 @@ function classNames(...classes) {
 export function NavBar({ initialNavigation }) {
     //login
     const { user, logout } = useAuth();
-    const admin = JSON.parse(localStorage.getItem('user') || '{}').rol;
+    const admin = JSON.parse(localStorage.getItem('user') || '{}').rol === "ADMIN";
     //const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     //Sombreado rutas
@@ -166,6 +166,17 @@ export function NavBar({ initialNavigation }) {
                                                                 </MenuItem>
                                                             ): null
                                                         }
+                                                        <MenuItem>
+                                                            {({ focus }) => (
+                                                                <a
+                                                                    onClick={handleLogout}
+                                                                    href="/cambiarContraseña"
+                                                                    className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                                >
+                                                                    Cambiar contraseña
+                                                                </a>
+                                                            )}
+                                                        </MenuItem>
 
                                                         <MenuItem>
                                                             {({ focus }) => (
