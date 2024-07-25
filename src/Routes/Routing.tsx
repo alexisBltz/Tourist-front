@@ -170,6 +170,10 @@ export default function Routing() {
                         */
                     ]
                 },
+                {
+                    path: "/admin/ventas",
+                    element: <Ventas />
+                },
             ],
         },
 
