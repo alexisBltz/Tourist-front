@@ -14,22 +14,27 @@ import ProtectedRoutes from "./ProtectedRoutes.tsx";
 import Usuarios from "../pages/admin/usuariosTables/usuarios.tsx";
 import HomeAdmin from "../pages/admin/homeAdmin.tsx";
 import PaquetesAdmin from "../pages/admin/paquetesAdmin.tsx";
-import ServiciosAdmin from "../pages/admin/serviciosAdmin.tsx";
+
 import Ventas from "../pages/admin/ventas.tsx";
 import UnitService from "../pages/user/UnitService.tsx";
 
-import RegistrarServicio from "../components/Servicios/CrearServicio.tsx";
 
+import RegistrarServicio from "../components/Servicios/CrearServicio.tsx";
 import ServiciosDelPaquete from "../components/Paquetes/ServiciosDelPaquete.tsx";
 import ServiciosDelPaqueteAdmin from "../components/Paquetes/ServiciosDelPaqueteAdmin.tsx";
 import CrearPaquete from "../components/Paquetes/CrearPaquete.tsx";
 
 
 import {AuthProvider} from "../service/authContext.tsx";
+
+//usuarios
 import UsuariosActive from "../pages/admin/usuariosTables/UsuariosActive.tsx";
 import UsuariosInactive from "../pages/admin/usuariosTables/UsuariosInactive.tsx";
 import UsuariosAdmin from "../pages/admin/usuariosTables/UsuariosAdmin.tsx";
 import UsuariosNormales from "../pages/admin/usuariosTables/UsuariosNormales.tsx";
+import ServiciosAdmin from "../pages/admin/serviciosInfor/ServiciosAdmin.tsx";
+import ServiceActive from "../pages/admin/serviciosInfor/ServiciosActive.tsx";
+import ServiceInactive from "../pages/admin/serviciosInfor/ServiceInactive.tsx";
 
 
 export default function Routing() {
@@ -119,8 +124,22 @@ export default function Routing() {
                     ]
                 },
                 {
-                    path: "servicios/crear",
-                    element: <RegistrarServicio/>
+                    path: "/admin/servicios",
+                    element: <ServiciosAdmin/>,
+                    children: [
+                        {
+                            path: "crear",
+                            element: <RegistrarServicio/>
+                        },
+                        {
+                            path: "active",
+                            element: <ServiceActive/>
+                        },
+                        {
+                            path: "inactive",
+                            element: <ServiceInactive/>
+                        },
+                    ]
                 },
                 {
                     path: "/admin/servicios",

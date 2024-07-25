@@ -20,6 +20,7 @@ const navOptions = {
         { label: 'Listar Clientes', path: '/admin/usuarios/onlyUsers' },
     ],
     '/admin/servicios': [
+        {label: 'Ver todos los paquetes', path: '/admin/servicios' },
         { label: 'Crear Servicio', path: '/admin/servicios/crear' },
         { label: 'Ver Servicios Activos', path: '/admin/servicios/active' },
         { label: 'Ver Servicios Inactivos', path: '/admin/servicios/inactive' },

@@ -8,6 +8,7 @@ export interface ServicioData {
     fecha: string;
     costo: number;
     destino: string;
+    estadoRegistro: string;
 }
 export const getServicio = async (id: number) => {
     try {
@@ -48,6 +49,52 @@ export const getServicios = async (page: number, size: number): Promise<Servicio
         throw error;
     }
 };
+
+export const getServiciosActivos = async (page: number, size: number): Promise<ServicioData[]> => {
+    try {
+        const response = await fetch(`${API_URL}/servicio/activos?page=${page}&size=${size}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Error fetching servicios');
+        }
+        const data = await response.json();
+        console.log('Datos recibidos del backend:', data); // Log para verificar datos
+
+        // Supongamos que el array está en `data.content`
+        return data.content && Array.isArray(data.content) ? data.content : [];
+    } catch (error) {
+        console.error('Error fetching servicios:', error);
+        throw error;
+    }
+};
+
+export const getServiciosInactivos = async (page: number, size: number): Promise<ServicioData[]> => {
+    try {
+        const response = await fetch(`${API_URL}/servicio/inactivos?page=${page}&size=${size}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Error fetching servicios');
+        }
+        const data = await response.json();
+        console.log('Datos recibidos del backend:', data); // Log para verificar datos
+
+        // Supongamos que el array está en `data.content`
+        return data.content && Array.isArray(data.content) ? data.content : [];
+    } catch (error) {
+        console.error('Error fetching servicios:', error);
+        throw error;
+    }
+};
+
+
 interface CrearServicio {
     image: string;
     descripcion: string;
@@ -100,10 +147,28 @@ export const updateServicio = async (id: number, servicioData: Partial<ServicioD
     }
 };
 
-export const deleteServicio = async (id: number, token:string |null) => {
+export const inactivarServicio = async (id: number, token:string |null) => {
 
     try {
-        const response = await fetch(`${API_URL}/servicio/${id}`, {
+        const response = await fetch(`${API_URL}/servicio/inactivar/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Error deleting servicio');
+        }
+    } catch (error) {
+        console.error('Error deleting servicio:', error);
+        throw error;
+    }
+};
+export const activarServicio = async (id: number, token:string |null) => {
+
+    try {
+        const response = await fetch(`${API_URL}/servicio/activar/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

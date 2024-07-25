@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import {getServiciosPorPaquete, ServicioData,} from "../../service/paqueteService.ts";
 
 import ServicioCardAdmin from "../Servicios/CardAdmin.tsx";
-import {deleteServicio} from "../../service/servicioService.ts";
+import {inactivarServicio} from "../../service/servicioService.ts";
 import useAuthToken from "../../service/useAuthToken.ts";
 // Importa la función
 
@@ -15,7 +15,7 @@ const ServiciosDelPaquete: React.FC = () => {
     const eliminarServicio = async (id: number) => {
 
         try {
-            await deleteServicio(id, token);
+            await inactivarServicio(id, token);
             // Actualiza la lista de servicios después de eliminar
             setServicios(prev => prev.filter(servicio => servicio.id !== id));
             console.log(`Servicio con ID ${id} eliminado.`);
@@ -59,7 +59,7 @@ const ServiciosDelPaquete: React.FC = () => {
                                 fecha={servicio.fecha}
                                 costo={servicio.costo}
                                 destino={servicio.destino}
-                                onDelete={eliminarServicio}
+                                onInactivar={eliminarServicio}
                             />
                         );
                     })

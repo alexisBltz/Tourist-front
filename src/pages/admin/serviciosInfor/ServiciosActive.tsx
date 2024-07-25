@@ -1,10 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {deleteServicio, getServicios, ServicioData} from "../../service/servicioService.ts";
+import {
+    activarServicio,
+    getServiciosActivos,
+    inactivarServicio,
+    ServicioData
+} from "../../../service/servicioService.ts";
 
-import ServicioCardAdmin from "./CardAdmin.tsx";
-import useAuthToken from "../../service/useAuthToken.ts";
+import ServicioCardAdmin from "../../../components/Servicios/CardAdmin.tsx";
+import useAuthToken from "../../../service/useAuthToken.ts";
 
-const ListaDeServiciosAdmin: React.FC = () => {
+const ServiciosActive: React.FC = () => {
     const [servicios, setServicios] = useState<ServicioData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [pagina, setPagina] = useState<number>(0);
@@ -13,7 +18,7 @@ const ListaDeServiciosAdmin: React.FC = () => {
     const fetchServicios = async (pagina: number) => {
         setLoading(true);
         try {
-            const data = await getServicios(pagina, 5);
+            const data = await getServiciosActivos(pagina, 5);
             console.log('Datos obtenidos:', data);
 
             if (Array.isArray(data)) {
@@ -38,9 +43,19 @@ const ListaDeServiciosAdmin: React.FC = () => {
         }
     };
 
-    const eliminarServicio = async (id: number) => {
+    const inactivarServicioo = async (id: number) => {
         try {
-            await deleteServicio(id, token);
+            await inactivarServicio(id, token);
+            // Actualiza la lista de servicios después de eliminar
+            setServicios(prev => prev.filter(servicio => servicio.id !== id));
+            console.log(`Servicio con ID ${id} eliminado.`);
+        } catch (error) {
+            console.error('Error eliminando servicio:', error);
+        }
+    };
+    const activarServicioo = async (id: number) => {
+        try {
+            await activarServicio(id, token);
             // Actualiza la lista de servicios después de eliminar
             setServicios(prev => prev.filter(servicio => servicio.id !== id));
             console.log(`Servicio con ID ${id} eliminado.`);
@@ -80,7 +95,8 @@ const ListaDeServiciosAdmin: React.FC = () => {
                         fecha={servicio.fecha}
                         costo={servicio.costo}
                         destino={servicio.destino}
-                        onDelete={eliminarServicio} // Pasa la función de eliminar
+                        estadoRegistro={servicio.estadoRegistro}
+                        onInactive= {inactivarServicioo} // Pasa la función de eliminar
                     />
                 ))}
             </div>
@@ -98,4 +114,4 @@ const ListaDeServiciosAdmin: React.FC = () => {
     );
 };
 
-export default ListaDeServiciosAdmin;
+export default ServiciosActive;
